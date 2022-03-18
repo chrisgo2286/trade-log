@@ -1,0 +1,12 @@
+:root {
+  --navBarBG: rgb(48, 100, 117);
+  --navBarLink: white;
+  --navBarLinkHover: lightblue;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial;
+  font-size: 14px;
+}

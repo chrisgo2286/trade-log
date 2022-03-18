@@ -1,0 +1,14 @@
+.trade-input {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+  }
+
+  .trade-input label {
+    text-align: right;
+    margin-right: 20%
+  }
+
+  .buttons {
+    margin-top: 10px;
+    text-align: center;
+  }
