@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/navBar';
 import Home from './components/home';
@@ -9,17 +9,20 @@ import axios from 'axios';
 import './styles/App.css';
 
 export default function App() {
-  const [trades, setTrades] = useState([]);
+
+  const fetchData = async () => {
+    const result = await axios.get('/api/trades/',);
+    setTrades({ ...trades, tradeList: result.data });
+  };
+
+  const [trades, setTrades] = useState({tradeList:[], refresh: fetchData});
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('/api/trades/',);
-      setTrades(result.data);
-    };
-  
     fetchData();
-  }, []);
+  },[]);
   
+
+
   return (
     <React.Fragment>
       <TradeContext.Provider value={ trades }>  
@@ -29,7 +32,7 @@ export default function App() {
             <Route path='/' element={ <Home /> } />  
             <Route 
               path='/ledger' 
-              element={ <Ledger /> } 
+              element={ <Ledger/> } 
             />
             <Route 
               path='/summary' 

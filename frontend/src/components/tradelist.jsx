@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { TradeContext } from '../index.js';
 import Trade from './trade';
 
 export default function TradeList() {
 
   const trades = useContext(TradeContext);
-  
+  const [filterClicked, setFilterClicked] = useState(false);
+  const [newTradeClicked, setNewTradeClicked] = useState(false);
+
   return(
     <React.Fragment>
       <TradeListHeader />
       <div className='trade-list'>
-        { trades.map((trade) => (
+        { trades.tradeList.map((trade) => (
           <Trade 
             key={ trade.id }
             trade={ trade }

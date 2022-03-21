@@ -6,8 +6,6 @@ import TradeUpdate from './tradeUpdate';
 export default function Trade(props) {
   const [tradeHovered, setTradeHovered] = useState(false);
   const [tradeClicked, setTradeClicked] = useState(false);
-  const [filterClicked, setFilterClicked] = useState(false);
-  const [newTradeClicked, setNewTradeClicked] = useState(false);
 
   function handleTradeClass () {
     return (tradeHovered === true) ? 'trade hover': 'trade';
@@ -39,7 +37,10 @@ export default function Trade(props) {
       <Modal 
         showModal={ tradeClicked }
         exitModal={ toggleTradeClicked }>
-        <TradeUpdate />
+        <TradeUpdate 
+          trade={ props.trade }
+          exitModal={ toggleTradeClicked }
+        />
       </Modal>
 
     </React.Fragment>

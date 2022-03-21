@@ -1,21 +1,19 @@
-import { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import TradeInput from './tradeInput';
-import '../styles/tradeUpdate.css';
 import { TradeContext } from '../index.js';
+import axios from 'axios';
 
-export default function TradeUpdate(props) {
+export default function NewTrade(props) {
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
-    id: props.trade.id,
-    stock: props.trade.stock,
-    price: props.trade.price,
-    shares: props.trade.shares,
-    commission: props.trade.commission,
-    date: props.trade.date,
-    comment: props.trade.comment,     
+    stock: '',
+    price: '',
+    shares: '',
+    commission: '',
+    date: '',
+    comment: '',     
   });
-  
+
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
@@ -23,21 +21,12 @@ export default function TradeUpdate(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    axios.put('/api/trades/' + fields.id + '/', fields)
-      .then(response => (
-        console.log(response)
-      ))
+    console.log(fields)
+    axios.post('/api/trades/', fields)
+    .then(response => (
+      console.log(response)))
     trades.refresh();
     props.exitModal();
-  }
-
-  function deleteTrade() {
-    axios.delete('/api/trades/' + fields.id + '/')
-      .then(response => (
-        console.log(response)
-      ))
-    trades.refresh();
-    props.exitModal();  
   }
 
   function closeModal() {
@@ -45,7 +34,7 @@ export default function TradeUpdate(props) {
   }
 
   return(
-    <form onSubmit={ handleSubmit }>
+    <form className='new-trade' onSubmit={ handleSubmit }>
       <TradeInput 
         name='stock'
         type='text'
@@ -84,7 +73,6 @@ export default function TradeUpdate(props) {
       />
       <div className='buttons'>
         <button type='submit' name='submit'>Save</button>
-        <button type='button' name='delete' onClick={ deleteTrade }>Delete</button>
         <button type='button' name='close' onClick={ closeModal }>Close</button>
       </div>
     </form>
