@@ -2,15 +2,14 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 8vh;
+  justify-content: space-between;
+  min-height: 10vh;
   background: var(--navBarBG);
 }
   
 nav a {
-  margin-left: 100px;
+  margin: 0px 30px;
   text-decoration: none;
-  color: var(--navBarLink);
-  font-size: 18px;
 }
   
 nav a:hover {

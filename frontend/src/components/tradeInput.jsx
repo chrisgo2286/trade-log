@@ -11,7 +11,6 @@ export default function tradeInput(props) {
     <div className='trade-input'>
       <label htmlFor={ props.name }>{ handleLable() }</label>
       <input
-        className='trade-input' 
         type={ props.type } 
         name={ props.name } 
         id={ props.name } 

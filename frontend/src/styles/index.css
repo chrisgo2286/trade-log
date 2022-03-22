@@ -1,7 +1,7 @@
 :root {
-  --navBarBG: rgb(48, 100, 117);
-  --navBarLink: white;
-  --navBarLinkHover: lightblue;
+  --siteFontColor: rgba(48, 42, 42, 0.75);
+  --navBarBG: rgba(211, 211, 211, .5);  
+  --navBarLinkHover: slategrey;
 }
 
 * {
@@ -9,4 +9,5 @@
   padding: 0px;
   font-family: Arial;
   font-size: 14px;
+  color: var(--siteFontColor);
 }

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
 import axios from 'axios';
+import '../styles/tradeUpdate.css';
 
 export default function NewTrade(props) {
   const trades = useContext(TradeContext);
@@ -34,7 +35,7 @@ export default function NewTrade(props) {
   }
 
   return(
-    <form className='new-trade' onSubmit={ handleSubmit }>
+    <form onSubmit={ handleSubmit }>
       <TradeInput 
         name='stock'
         type='text'

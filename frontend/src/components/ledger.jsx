@@ -15,7 +15,8 @@ function Ledger() {
   return(
     <React.Fragment>
       <div className='icons'>
-        <button onClick={ toggleNewTradeClicked }>Add Trade</button>
+        <i className='material-icons' >build</i>
+        <i className='material-icons' onClick={ toggleNewTradeClicked }>library_add</i>
       </div>
       <TradeList />
       <Modal showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }>

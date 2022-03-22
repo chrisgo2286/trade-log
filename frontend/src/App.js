@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/navBar';
 import Home from './components/home';
 import Ledger from './components/ledger';
-import Summary from './components/summary';
+import Portfolio from './components/portfolio';
+import Analysis from './components/analysis';
 import { TradeContext } from './index.js';
 import axios from 'axios';
 import './styles/App.css';
@@ -35,8 +36,12 @@ export default function App() {
               element={ <Ledger/> } 
             />
             <Route 
-              path='/summary' 
-              element={ <Summary /> } 
+              path='/portfolio' 
+              element={ <Portfolio /> } 
+            />
+            <Route 
+              path='/analysis' 
+              element={ <Analysis /> } 
             />
           </Routes>
         </Router>

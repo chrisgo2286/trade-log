@@ -5,9 +5,16 @@ import '../styles/navbar.css'
 function NavBar() {
   return (
     <nav>
-      <Link to='/'>Home</Link>   
-      <Link to='/summary'>Summary</Link>
-      <Link to='/ledger'>Ledger</Link>
+      <div className='site-links'>    
+        <Link to='/'>HOME</Link>   
+        <Link to='/portfolio'>PORTFOLIO</Link>
+        <Link to='/ledger'>LEDGER</Link>
+        <Link to='/analysis'>ANALYSIS</Link>
+      </div>
+      <div className="user-links">
+        <span>Hello Christian!</span>
+        <Link to='/'>LOG OUT</Link>
+      </div>
     </nav>
   )
 }
