@@ -10,6 +10,9 @@
   }
 
   .trade-input input {
+    padding-left: 10px;
     width: 80%;
+    height: 20px;
     margin: 5px 0px;
+    border: 1px solid var(--siteBorderColor)
   }
