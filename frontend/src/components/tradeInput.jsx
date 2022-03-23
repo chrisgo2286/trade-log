@@ -1,4 +1,5 @@
 import '../styles/tradeInput.css';
+
 export default function tradeInput(props) {
   function handleChange (event) {
     props.onChange(event);
