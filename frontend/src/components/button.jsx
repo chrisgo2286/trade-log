@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/button.css';
 
 export default function Button(props) {
     const [buttonHovered, setButtonHovered] = useState(false);
@@ -8,7 +9,7 @@ export default function Button(props) {
     }
   
     function handleClass () {
-      return (buttonHovered) ? 'hover': '';
+      return (buttonHovered) ? 'btn hover': 'btn';
     }
   
     return (

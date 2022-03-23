@@ -25,7 +25,7 @@ function Ledger() {
 
   return(
     <main className='ledger-container'>
-      <div className='icons'>
+      <div className='ledger-btns'>
         <Button onClick={ toggleFilterClicked }>FILTER</Button>
         <Button onClick={ toggleSortClicked }>SORT</Button>
         <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>

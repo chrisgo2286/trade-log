@@ -10,25 +10,41 @@
     pointer-events: none;
   }
     
-  .modal-main {
-    position:fixed;
-    background: white;
-    width: 40%;
-    max-width: 400px;
-    height: auto;
-    top:30%;
-    left:30%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease-in-out;
-    padding: 10px;
-    border-radius: 20px;
-  }
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 40%;
+  max-width: 400px;
+  height: auto;
+  top:30%;
+  left:30%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
     
-  .visible {
-    opacity: 1;
-    pointer-events: visible;
-  }
+.visible {
+  opacity: 1;
+  pointer-events: visible;
+}
 
-  .modal-main, .visible {
-    transform: translateY(0%);
-  }
+.modal-main, .visible {
+  transform: translateY(0%);
+}
+
+.modal-header {
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  border-bottom: 1px solid var(--siteBorderColor);
+  background-color: var(--modalHeaderColor);
+}
+
+.modal-body {
+  margin: 10px 0px;
+}
+
+.modal-btns {
+  text-align: center;
+  margin: 20px auto;
+}

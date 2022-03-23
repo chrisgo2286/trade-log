@@ -5,8 +5,8 @@
   --navBarLinkHover: slategrey;
   --tradeListHeaderColor: lightgrey;
   --hoverColor: rgba(211, 231, 240, 0.5);
+  --modalHeaderColor: var(--hoverColor);
 }
-
 * {
   margin: 0px;
   padding: 0px;

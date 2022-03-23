@@ -4,33 +4,10 @@
   margin: 50px;
 }
 
-/* ICONS */
-.icons {
-  margin: 20px 0px;
+.ledger-btns {
+  height: 50px;
+  line-height: 50px;
 }
-
-.icons span {
-  margin: 30px;
-  padding: 10px;
-  border: 1px solid var(--siteBorderColor);
-}
-
-/* NEWTRADE */
-
-.new-trade {
-  display: flex;
-  flex-direction: column;
-  max-width: 200px;
-}
-  
-.new-trade input {
-  margin: 10px 0px 0px 10px;
-}
-  
-.new-trade button {
-  margin: 10px auto 0px auto;
-}
-
 /* TRADELIST */
   
 .trade-list {

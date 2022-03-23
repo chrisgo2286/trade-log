@@ -1,0 +1,9 @@
+.btn {
+  display: inline-block;
+  text-align: center;;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0px 10px;
+  border: 1px solid var(--siteBorderColor);
+}

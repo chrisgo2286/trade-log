@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import TradeInput from './tradeInput';
-import '../styles/tradeUpdate.css';
 import { TradeContext } from '../index.js';
 
 export default function TradeUpdate(props) {
