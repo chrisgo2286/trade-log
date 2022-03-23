@@ -1,7 +1,10 @@
 :root {
   --siteFontColor: rgba(48, 42, 42, 0.75);
+  --siteBorderColor: rgba(211, 211, 211, .75);
   --navBarBG: rgba(211, 211, 211, .5);  
   --navBarLinkHover: slategrey;
+  --tradeListHeaderColor: lightgrey;
+  --hoverColor: rgba(211, 231, 240, 0.5);
 }
 
 * {

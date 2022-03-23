@@ -1,7 +1,18 @@
+.ledger-container {
+  border: 1px solid var(--siteBorderColor);
+  max-width: 1000px;
+  margin: 50px;
+}
+
 /* ICONS */
 .icons {
-  text-align: right;
-  margin-right: 10%
+  margin: 20px 0px;
+}
+
+.icons span {
+  margin: 30px;
+  padding: 10px;
+  border: 1px solid var(--siteBorderColor);
 }
 
 /* NEWTRADE */
@@ -25,23 +36,23 @@
 .trade-list {
   display: flex;
   flex-direction: column;
-  max-width: 1200px;
-  margin: 20px;
 }
   
 .trade,
 .header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  padding: 5px 0px;
-  border-bottom: 1px solid rgba(211, 211, 211, .6);
+  padding: 5px 0px 5px 25px;
+  border: 1px solid var(--siteBorderColor);
 }
   
 .header {
   font-weight: bold;
+  border: 1px solid var(--siteBorderColor);
+  background-color: var(--tradeListHeaderColor);
 }
   
 .hover {
-  background-color: rgba(173, 216, 230, .5);
-  border: 1px solid rgba(173, 216, 230, .5)
+  background-color: var(--hoverColor);
+  cursor: pointer;
 }

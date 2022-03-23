@@ -4,25 +4,37 @@ import NewTrade from './newTrade';
 import { TradeContext } from '../index.js';
 import '../styles/ledger.css';
 import Modal from './modal';
+import Button from './button';
 
 function Ledger() {
   const [newTradeClicked, setNewTradeClicked] = useState(false);
+  const [sortClicked, setSortClicked] = useState(false);
+  const [filterClicked, setFilterClicked] = useState(false);
 
   function toggleNewTradeClicked () {
     setNewTradeClicked(!newTradeClicked);
   }
 
+  function toggleSortClicked () {
+    setSortClicked(!sortClicked);
+  }
+  
+  function toggleFilterClicked () {
+    setFilterClicked(!filterClicked);
+  }
+
   return(
-    <React.Fragment>
+    <main className='ledger-container'>
       <div className='icons'>
-        <i className='material-icons' >build</i>
-        <i className='material-icons' onClick={ toggleNewTradeClicked }>library_add</i>
+        <Button onClick={ toggleFilterClicked }>FILTER</Button>
+        <Button onClick={ toggleSortClicked }>SORT</Button>
+        <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>
       </div>
       <TradeList />
       <Modal showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }>
         <NewTrade exitModal={ toggleNewTradeClicked }/>
       </Modal>
-    </React.Fragment>
+    </main>
   );
 }
 
