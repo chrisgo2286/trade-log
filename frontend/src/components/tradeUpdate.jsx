@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
+import Button from './button';
 
 export default function TradeUpdate(props) {
   const trades = useContext(TradeContext);
@@ -44,48 +45,53 @@ export default function TradeUpdate(props) {
   }
 
   return(
-    <form onSubmit={ handleSubmit }>
-      <TradeInput 
-        name='stock'
-        type='text'
-        value={ fields.stock }
-        onChange={ handleChange }
-      />
-      <TradeInput 
-        name='price'
-        type='decimal'
-        value={ fields.price }
-        onChange={ handleChange }
-      />
-      <TradeInput 
-        name='shares'
-        type='number'
-        value={ fields.shares }
-        onChange={ handleChange }
-      />
-      <TradeInput 
-        name='commission'
-        type='decimal'
-        value={ fields.commission }
-        onChange={ handleChange }
-      />
-      <TradeInput 
-        name='date'
-        type='date'
-        value={ fields.date }
-        onChange={ handleChange }
-      />
-      <TradeInput 
-        name='comment'
-        type='text'
-        value={ fields.comment }
-        onChange={ handleChange }
-      />
-      <div className='buttons'>
-        <button type='submit' name='submit'>Save</button>
-        <button type='button' name='delete' onClick={ deleteTrade }>Delete</button>
-        <button type='button' name='close' onClick={ closeModal }>Close</button>
+    <div>
+      <div className='modal-header'>
+        <div>UPDATE TRADE</div>
       </div>
-    </form>
+      <form onSubmit={ handleSubmit }>
+        <TradeInput 
+          name='stock'
+          type='text'
+          value={ fields.stock }
+          onChange={ handleChange }
+        />
+        <TradeInput 
+          name='price'
+          type='decimal'
+          value={ fields.price }
+          onChange={ handleChange }
+        />
+        <TradeInput 
+          name='shares'
+          type='number'
+          value={ fields.shares }
+          onChange={ handleChange }
+        />
+        <TradeInput 
+          name='commission'
+          type='decimal'
+          value={ fields.commission }
+          onChange={ handleChange }
+        />
+        <TradeInput 
+          name='date'
+          type='date'
+          value={ fields.date }
+          onChange={ handleChange }
+        />
+        <TradeInput 
+          name='comment'
+          type='text'
+          value={ fields.comment }
+          onChange={ handleChange }
+        />
+        <div className='modal-btns'>
+          <Button onClick={ handleSubmit }>Save</Button>
+          <Button onClick={ deleteTrade }>Delete</Button>
+          <Button onClick={ closeModal }>Close</Button>
+        </div>
+      </form>
+    </div>
   );
 }
