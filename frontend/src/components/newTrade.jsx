@@ -4,6 +4,7 @@ import { TradeContext } from '../index.js';
 import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
+import { validate } from '../validator';
 
 export default function NewTrade(props) {
   const trades = useContext(TradeContext);
@@ -39,22 +40,9 @@ export default function NewTrade(props) {
   }
 
   function validateFields() {
-    var fieldErrors = {}
-    var errors = false;
-    if(fields.stock === '') {
-      fieldErrors.stock = 'Please enter a valid stock ticker!'
-      errors = true;
-    }
-    if(fields.price === '') {
-      fieldErrors.price = 'Please enter a valid share price!'
-      errors = true;
-    }
+    const fieldErrors = validate(fields);
     setFieldErrors(fieldErrors)
-    return errors;
-  }
-
-  function changeFieldErrors(key, value) {
-    setFieldErrors({ ...fieldErrors, [key]: value })
+    return (Object.keys(fieldErrors).length > 0);
   }
 
   return(
