@@ -1,3 +1,5 @@
+import validator from 'validator';
+
 export function validate(fields) {
   var fieldErrors = {};
 
@@ -5,13 +7,9 @@ export function validate(fields) {
     fieldErrors.stock = 'Please enter a valid stock ticker!'
   }
 
-  if(typeof fields.price !== 'number') {
-    fieldErrors.price = 'Share price must be a whole number!'
-  }  
-
-  if(fields.price === '') {
+  if(!validator.isDecimal(fields.price) | fields.price === '') {
     fieldErrors.price = 'Please enter a valid share price!'
-  }
+  }  
 
   return fieldErrors;  
 }

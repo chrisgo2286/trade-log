@@ -22,7 +22,16 @@ export default function NewTrade(props) {
   function closeModal () {
     props.exitModal();
     setFieldErrors({});
+    setFields({
+      stock: '',
+      price: '',
+      shares: '',
+      commission: '',
+      date: '',
+      comment: '',   
+    })
   }
+  
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
