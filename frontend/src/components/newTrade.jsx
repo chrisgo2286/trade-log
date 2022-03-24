@@ -15,14 +15,17 @@ export default function NewTrade(props) {
     comment: '',     
   });
 
+  const [fieldErrors, setFieldErrors] = useState({});
+
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    console.log(fields)
+
+    if(validateFields()) return;
+
     axios.post('/api/trades/', fields)
     .then(response => (
       console.log(response)))
@@ -32,6 +35,26 @@ export default function NewTrade(props) {
 
   function closeModal() {
     props.exitModal();
+    setFieldErrors({});
+  }
+
+  function validateFields() {
+    var fieldErrors = {}
+    var errors = false;
+    if(fields.stock === '') {
+      fieldErrors.stock = 'Please enter a valid stock ticker!'
+      errors = true;
+    }
+    if(fields.price === '') {
+      fieldErrors.price = 'Please enter a valid share price!'
+      errors = true;
+    }
+    setFieldErrors(fieldErrors)
+    return errors;
+  }
+
+  function changeFieldErrors(key, value) {
+    setFieldErrors({ ...fieldErrors, [key]: value })
   }
 
   return(
@@ -77,6 +100,11 @@ export default function NewTrade(props) {
             value={ fields.comment }
             onChange={ handleChange }
           />
+          <div className="validation">
+            { Object.values(fieldErrors).map((error, ndx) => (
+              <p key={ ndx }>{ error }</p>
+            ))}
+          </div>
           <div className='modal-btns'>
             <Button onClick={ handleSubmit }>Save</Button>
             <Button onClick={ closeModal }>Close</Button>
