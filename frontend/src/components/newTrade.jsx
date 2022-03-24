@@ -3,6 +3,7 @@ import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
 import axios from 'axios';
 import Button from './button';
+import Modal from './modal';
 
 export default function NewTrade(props) {
   const trades = useContext(TradeContext);
@@ -17,6 +18,10 @@ export default function NewTrade(props) {
 
   const [fieldErrors, setFieldErrors] = useState({});
 
+  function closeModal () {
+    props.exitModal();
+    setFieldErrors({});
+  }
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
@@ -31,11 +36,6 @@ export default function NewTrade(props) {
       console.log(response)))
     trades.refresh();
     props.exitModal();
-  }
-
-  function closeModal() {
-    props.exitModal();
-    setFieldErrors({});
   }
 
   function validateFields() {
@@ -58,7 +58,7 @@ export default function NewTrade(props) {
   }
 
   return(
-    <div>
+    <Modal showModal={ props.showModal } exitModal={ closeModal }>
       <div className='modal-header'>
         <div>NEW TRADE</div>
       </div>
@@ -111,6 +111,6 @@ export default function NewTrade(props) {
           </div>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 }

@@ -3,7 +3,6 @@ import TradeList from './tradelist';
 import NewTrade from './newTrade';
 import { TradeContext } from '../index.js';
 import '../styles/ledger.css';
-import Modal from './modal';
 import Button from './button';
 
 function Ledger() {
@@ -13,6 +12,7 @@ function Ledger() {
 
   function toggleNewTradeClicked () {
     setNewTradeClicked(!newTradeClicked);
+    
   }
 
   function toggleSortClicked () {
@@ -31,9 +31,7 @@ function Ledger() {
         <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>
       </div>
       <TradeList />
-      <Modal showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }>
-        <NewTrade exitModal={ toggleNewTradeClicked }/>
-      </Modal>
+      <NewTrade showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }/>
     </main>
   );
 }
