@@ -4,6 +4,7 @@ import { TradeContext } from '../index.js';
 import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
+import ValidationErrors from './validationErrors';
 import { validate } from '../validator';
 
 export default function NewTrade(props) {
@@ -97,11 +98,7 @@ export default function NewTrade(props) {
             value={ fields.comment }
             onChange={ handleChange }
           />
-          <div className="validation">
-            { Object.values(fieldErrors).map((error, ndx) => (
-              <p key={ ndx }>{ error }</p>
-            ))}
-          </div>
+          <ValidationErrors errors={ Object.values(fieldErrors) }/>
           <div className='modal-btns'>
             <Button onClick={ handleSubmit }>Save</Button>
             <Button onClick={ closeModal }>Close</Button>

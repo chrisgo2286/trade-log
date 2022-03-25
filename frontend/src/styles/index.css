@@ -6,6 +6,7 @@
   --tradeListHeaderColor: lightgrey;
   --hoverColor: rgba(211, 231, 240, 0.5);
   --modalHeaderColor: var(--hoverColor);
+  --errorColor: rgba(255, 0, 0, .25);
 }
 * {
   margin: 0px;
