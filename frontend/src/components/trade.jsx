@@ -34,15 +34,11 @@ export default function Trade(props) {
         <div className='trade-date'>{ props.trade.date }</div>
         <div className='trade-comment'>{ props.trade.comment }</div>
       </div>
-      <Modal 
-        showModal={ tradeClicked }
-        exitModal={ toggleTradeClicked }>
-        <TradeUpdate 
+        <TradeUpdate
+          showModal={ tradeClicked } 
           trade={ props.trade }
           exitModal={ toggleTradeClicked }
         />
-      </Modal>
-
     </React.Fragment>
   );
 }

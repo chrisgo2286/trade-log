@@ -3,6 +3,9 @@ import axios from 'axios';
 import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
 import Button from './button';
+import Modal from './modal';
+import ValidationErrors from './validationErrors';
+import { validate } from '../validator';
 
 export default function TradeUpdate(props) {
   const trades = useContext(TradeContext);
@@ -16,19 +19,42 @@ export default function TradeUpdate(props) {
     comment: props.trade.comment,     
   });
   
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  function closeModal () {
+    props.exitModal();
+    setFieldErrors({});
+    setFields({
+      id: props.trade.id,
+      stock: props.trade.stock,
+      price: props.trade.price,
+      shares: props.trade.shares,
+      commission: props.trade.commission,
+      date: props.trade.date,
+      comment: props.trade.comment, 
+    })
+  }
+
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    
+    if(validateFields()) return;
     axios.put('/api/trades/' + fields.id + '/', fields)
       .then(response => (
         console.log(response)
       ))
     trades.refresh();
-    props.exitModal();
+    closeModal();
+  }
+
+  function validateFields() {
+    const fieldErrors = validate(fields);
+    setFieldErrors(fieldErrors)
+    return (Object.keys(fieldErrors).length > 0);
   }
 
   function deleteTrade() {
@@ -37,15 +63,11 @@ export default function TradeUpdate(props) {
         console.log(response)
       ))
     trades.refresh();
-    props.exitModal();  
-  }
-
-  function closeModal() {
-    props.exitModal();
+    closeModal();  
   }
 
   return(
-    <div>
+    <Modal showModal={ props.showModal } exitModal={ closeModal }>
       <div className='modal-header'>
         <div>UPDATE TRADE</div>
       </div>
@@ -86,12 +108,13 @@ export default function TradeUpdate(props) {
           value={ fields.comment }
           onChange={ handleChange }
         />
+        <ValidationErrors errors={ Object.values(fieldErrors) }/>
         <div className='modal-btns'>
           <Button onClick={ handleSubmit }>Save</Button>
           <Button onClick={ deleteTrade }>Delete</Button>
           <Button onClick={ closeModal }>Close</Button>
         </div>
       </form>
-    </div>
+    </Modal>
   );
 }

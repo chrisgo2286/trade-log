@@ -46,7 +46,7 @@ export default function NewTrade(props) {
     .then(response => (
       console.log(response)))
     trades.refresh();
-    props.exitModal();
+    closeModal();
   }
 
   function validateFields() {
