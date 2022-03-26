@@ -12,7 +12,6 @@ function Ledger() {
 
   function toggleNewTradeClicked () {
     setNewTradeClicked(!newTradeClicked);
-    
   }
 
   function toggleSortClicked () {

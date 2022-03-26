@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './modal';
 import TradeUpdate from './tradeUpdate';
+import { createRoutesFromChildren } from 'react-router-dom';
 
 export default function Trade(props) {
   const [tradeHovered, setTradeHovered] = useState(false);
@@ -19,6 +20,11 @@ export default function Trade(props) {
     setTradeClicked(!tradeClicked);
   }
 
+  function calcTotal () {
+    var total = props.trade.price * props.trade.shares + parseFloat(props.trade.commission)
+    return total.toFixed(2);
+  }
+
   return (
     <React.Fragment>
       <div 
@@ -27,12 +33,13 @@ export default function Trade(props) {
         onMouseLeave={ toggleTradeHovered }
         onClick={ toggleTradeClicked }
       >
-        <div className='trade-stock'>{ props.trade.stock }</div>
-        <div className='trade-price'>{ props.trade.price }</div>
-        <div className='trade-shares'>{ props.trade.shares }</div>
-        <div className='trade-commission'>{ props.trade.commission }</div>
-        <div className='trade-date'>{ props.trade.date }</div>
-        <div className='trade-comment'>{ props.trade.comment }</div>
+        <div>{ props.trade.stock }</div>
+        <div>{ props.trade.price }</div>
+        <div>{ props.trade.shares }</div>
+        <div>{ props.trade.commission }</div>
+        <div>{ calcTotal() }</div>
+        <div>{ props.trade.date }</div>
+        <div>{ props.trade.comment }</div>
       </div>
         <TradeUpdate
           showModal={ tradeClicked } 

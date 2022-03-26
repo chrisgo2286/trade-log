@@ -18,7 +18,7 @@
 .trade,
 .header {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   padding: 5px 0px 5px 25px;
   border: 1px solid var(--siteBorderColor);
 }

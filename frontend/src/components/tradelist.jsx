@@ -30,6 +30,7 @@ function TradeListHeader() {
       <div>PRICE</div>
       <div>SHARES</div>
       <div>COMMISSION</div>
+      <div>TOTAL</div>
       <div>DATE</div>
       <div>COMMENT</div>     
     </div>
