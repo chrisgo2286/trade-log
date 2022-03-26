@@ -5,7 +5,7 @@ import { TradeContext } from '../index.js';
 import Button from './button';
 import Modal from './modal';
 import ValidationErrors from './validationErrors';
-import { validate } from '../validator';
+import { validate } from '../miscScripts/validator';
 
 export default function TradeUpdate(props) {
   const trades = useContext(TradeContext);
