@@ -1,18 +1,18 @@
-import React, { useContext, useState } from 'react';
-import { TradeContext } from '../index.js';
+import React, { useState } from 'react';
 import Trade from './trade';
 
-export default function TradeList() {
+export default function TradeList(props) {
 
-  const trades = useContext(TradeContext);
   const [filterClicked, setFilterClicked] = useState(false);
   const [newTradeClicked, setNewTradeClicked] = useState(false);
-
+  
   return(
     <React.Fragment>
-      <TradeListHeader />
+      <TradeListHeader 
+        onSortClicked={ props.onSortClicked }
+        onSortChanged={ props.onSortChanged }/>
       <div className='trade-list'>
-        { trades.tradeList.map((trade) => (
+        { props.trades.tradeList.map((trade) => (
           <Trade 
             key={ trade.id }
             trade={ trade }
@@ -26,13 +26,13 @@ export default function TradeList() {
 function TradeListHeader() {
   return (
     <div className='header'>
-      <div>STOCK</div>
-      <div>PRICE</div>
-      <div>SHARES</div>
-      <div>COMMISSION</div>
-      <div>TOTAL</div>
-      <div>DATE</div>
-      <div>COMMENT</div>     
+      <div name='stock'>STOCK</div>
+      <div name='price'>PRICE</div>
+      <div name='shares'>SHARES</div>
+      <div name='commission'>COMMISSION</div>
+      <div name='total'>TOTAL</div>
+      <div name='date'>DATE</div>
+      <div name='comment'>COMMENT</div>     
     </div>
   )
 }

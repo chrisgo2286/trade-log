@@ -21,8 +21,6 @@ export default function App() {
   useEffect(() => {
     fetchData();
   },[]);
-  
-
 
   return (
     <React.Fragment>
