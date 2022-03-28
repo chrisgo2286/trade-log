@@ -36,7 +36,7 @@ export default function TradeFilter(props) {
 
   return(
     <Modal showModal={ filter.show } exitModal={ closeModal } >
-      <Button onClick={ testFilter }>FILTER BY STOCK</Button>
+      <Button onClick={ testFilter }>FILTER BY VCN</Button>
       <Button onClick={ clearFilter }>CLEAR</Button>
       <Button onClick={ handleSubmit }>SUBMIT</Button>
     </Modal>

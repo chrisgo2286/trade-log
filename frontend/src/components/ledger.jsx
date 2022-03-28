@@ -23,7 +23,6 @@ export default function Ledger() {
   })
 
   function handleTrades () {
-    console.log(filter)
     return (filter.submitted === true) ? filterTrades(trades, filter.options): trades.tradeList;
   }
 
@@ -43,7 +42,9 @@ export default function Ledger() {
 
   // FILTER FUNCTIONS
   function showFilter () {
-    setFilter({ ...filter, show: true });
+    setFilter(filter => {
+      return { ...filter, show: true }
+    })
   }
 
   return(
