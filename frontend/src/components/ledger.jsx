@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import TradeList from './tradelist';
 import NewTrade from './newTrade';
-import { TradeContext } from '../index.js';
+import { TradeContext, FilterContext } from '../index.js';
 import '../styles/ledger.css';
 import Button from './button';
-import { filterTrades } from '../miscScripts/filterTrades';
 import TradeFilter from './tradeFilter';
+import { filterTrades } from '../miscScripts/filterTrades';
 
 export default function Ledger() {
   const trades = useContext(TradeContext);
@@ -16,13 +16,15 @@ export default function Ledger() {
     sortBy: 'date', sortType: 'ascending'
   })
 
-  const [filterClicked, setFilterClicked] = useState(false);
-  const [tradesFiltered, setTradesFiltered] = useState(false);
-  const [filterOptions, setFilterOptions] = useState({})
+  const [filter, setFilter] = useState({
+    show: false,
+    submitted: false,
+    options: {},
+  })
 
-  // MAIN FUNCTIONS
   function handleTrades () {
-    return (tradesFiltered === true) ? filterTrades(trades, filterOptions): trades;
+    console.log(filter)
+    return (filter.submitted === true) ? filterTrades(trades, filter.options): trades.tradeList;
   }
 
   // NEW TRADE FUNCTIONS
@@ -40,34 +42,21 @@ export default function Ledger() {
   }
 
   // FILTER FUNCTIONS
-  function toggleFilterClicked () {
-    setFilterClicked(!filterClicked);
-  }
-
-  function handleSubmitFilterOptions () {
-    setTradesFiltered(true);
-  }
-
-  function handleChangeFilterOptions (options) {
-    setFilterOptions(options);
+  function showFilter () {
+    setFilter({ ...filter, show: true });
   }
 
   return(
-    <main className='ledger-container'>
-      <div className='ledger-btns'>
-        <Button onClick={ toggleFilterClicked }>FILTER</Button>
-        <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>
-      </div>
-      <TradeList 
-        trades={ handleTrades()}
-        onSortClicked={ handleSortClicked }
-        onSortChange={ handleChangeSortOptions } />
-      <NewTrade showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }/>
-      <TradeFilter 
-        showModal={ filterClicked }
-        exitModal={ toggleFilterClicked } 
-        onSubmit={ handleSubmitFilterOptions } 
-        onChange={ handleChangeFilterOptions } />
-    </main>
+    <FilterContext.Provider value={ [filter, setFilter] } >
+      <main className='ledger-container'>
+        <div className='ledger-btns'>
+          <Button onClick={ showFilter }>FILTER</Button>
+          <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>
+        </div>
+        <TradeList tradeList={ handleTrades() }/>
+        <NewTrade showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }/>
+        <TradeFilter />
+      </main>
+    </FilterContext.Provider>
   );
 }

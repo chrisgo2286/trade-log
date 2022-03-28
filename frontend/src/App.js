@@ -31,7 +31,7 @@ export default function App() {
             <Route path='/' element={ <Home /> } />  
             <Route 
               path='/ledger' 
-              element={ <Ledger/> } 
+              element={ <Ledger /> } 
             />
             <Route 
               path='/portfolio' 

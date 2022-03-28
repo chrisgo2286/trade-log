@@ -1,5 +1,5 @@
 export function filterTrades (trades, options) {
-  console.log('FILTERING TRADES BY ' + options.sortBy)
-  console.log(trades)
-  return trades;
+  const filteredTrades = trades.tradeList.filter(trade => trade.stock === 'VCN');
+  console.log(filteredTrades)
+  return filteredTrades;
 }
