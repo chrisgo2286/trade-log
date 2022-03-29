@@ -1,19 +1,21 @@
 import React, { useState, useContext } from 'react';
 import TradeList from './tradelist';
 import NewTrade from './newTrade';
-import { TradeContext, FilterContext } from '../index.js';
+import { TradeContext, FilterContext, SortContext } from '../index.js';
 import '../styles/ledger.css';
 import Button from './button';
 import TradeFilter from './tradeFilter';
 import { filterTrades } from '../miscScripts/filterTrades';
+import { sortTrades } from '../miscScripts/sortTrades';
 
 export default function Ledger() {
   const trades = useContext(TradeContext);
   const [newTradeClicked, setNewTradeClicked] = useState(false);
 
-  const [sortClicked, setSortClicked] = useState(false);
-  const [sortOptions, setSortOptions] = useState({
-    sortBy: 'date', sortType: 'ascending'
+  const [sort, setSort] = useState({
+    active: false,
+    category: '',
+    type: '',
   })
 
   const [filter, setFilter] = useState({
@@ -23,21 +25,14 @@ export default function Ledger() {
   })
 
   function handleTrades () {
-    return (filter.submitted === true) ? filterTrades(trades, filter.options): trades.tradeList;
+    const filteredTrades = (filter.submitted === true) ? filterTrades(trades.tradeList, filter.options): trades.tradeList;
+    const sortedTrades = (sort.active === true) ? sortTrades(filteredTrades, sort.category, sort.type): filteredTrades;
+    return sortedTrades;
   }
 
   // NEW TRADE FUNCTIONS
   function toggleNewTradeClicked () {
     setNewTradeClicked(!newTradeClicked);
-  }
-
-  // SORT FUNCTIONS
-  function handleSortClicked () {
-    setSortClicked(true);
-  }
-
-  function handleChangeSortOptions (options) {
-    setSortOptions(options);
   }
 
   // FILTER FUNCTIONS
@@ -48,7 +43,8 @@ export default function Ledger() {
   }
 
   return(
-    <FilterContext.Provider value={ [filter, setFilter] } >
+    <FilterContext.Provider value={ [filter, setFilter] }>
+    <SortContext.Provider value={ [sort, setSort] }>
       <main className='ledger-container'>
         <div className='ledger-btns'>
           <Button onClick={ showFilter }>FILTER</Button>
@@ -58,6 +54,7 @@ export default function Ledger() {
         <NewTrade showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }/>
         <TradeFilter />
       </main>
+    </SortContext.Provider> 
     </FilterContext.Provider>
   );
 }
