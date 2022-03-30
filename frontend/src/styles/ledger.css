@@ -18,18 +18,25 @@
 .trade,
 .header {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  padding: 5px 0px 5px 25px;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 10px 0px 5px 25px;
   border: 1px solid var(--siteBorderColor);
+  cursor: pointer;
 }
   
 .header {
+  height: 25px;
+  line-height: 25px;
   font-weight: bold;
   border: 1px solid var(--siteBorderColor);
   background-color: var(--tradeListHeaderColor);
 }
-  
+
 .hover {
   background-color: var(--hoverColor);
-  cursor: pointer;
+  
+}
+
+.material-icons {
+  vertical-align: middle;
 }

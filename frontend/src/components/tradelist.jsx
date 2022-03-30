@@ -7,7 +7,7 @@ export default function TradeList(props) {
 
   return(
     <React.Fragment>
-      <TradeListHeader />
+      <TradeListHeaders />
       <div className='trade-list'>
         { props.tradeList.map((trade) => (
           <Trade 
@@ -20,13 +20,13 @@ export default function TradeList(props) {
   );
 }
 
-function TradeListHeader() {
+function TradeListHeaders() {
   const sort = useContext(SortContext)[0];
   const setSort = useContext(SortContext)[1];
   
   function handleSortClicked(event) {
     const newCategory = event.target.getAttribute('name');
-    toggleSortType(newCategory); 
+    toggleSortType(newCategory);
     setSort(sort => {
       return { ...sort, active: true, category: newCategory }
     })
@@ -46,13 +46,28 @@ function TradeListHeader() {
 
   return (
     <div className='header'>
-      <div onClick={ handleSortClicked } name='stock'>STOCK</div>
-      <div onClick={ handleSortClicked } name='price'>PRICE</div>
-      <div onClick={ handleSortClicked } name='shares'>SHARES</div>
-      <div onClick={ handleSortClicked } name='commission'>COMMISSION</div>
+      <Header name='stock' onClick={ handleSortClicked } />
+      <Header name='price' onClick={ handleSortClicked } />
+      <Header name='shares' onClick={ handleSortClicked } />
+      <Header name='commission' onClick={ handleSortClicked } />
       <div name='total'>TOTAL</div>
-      <div onClick={ handleSortClicked } name='date'>DATE</div>
-      <div name='comment'>COMMENT</div>     
+      <Header name='date' onClick={ handleSortClicked } />
+      <div name='comment'>COMMENT</div>
+    </div>
+  )
+}
+
+function Header (props) {
+  const sort = useContext(SortContext)[0];
+  function handleArrow() {
+    if(sort.category === props.name) {
+      return (sort.type === 'ascending') ? 'expand_less': 'expand_more';
+    }
+  }
+  
+  return (
+    <div onClick={ props.onClick } name={ props.name }>{ props.name.toUpperCase() }
+      <span className='material-icons'>{ handleArrow() }</span>
     </div>
   )
 }
