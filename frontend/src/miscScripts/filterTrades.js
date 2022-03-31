@@ -1,4 +1,7 @@
 export function filterTrades (trades, options) {
-  console.log(options)
-  return trades.filter(trade => trade.stock === 'VCN');
+  var stockChoices = []
+  for(var i=1; i<4; i++) {
+    ((('choice' + i) in options) === true) ? stockChoices.push(options['choice' + i]): stockChoices.push(''); 
+  }
+  return trades.filter(trade => stockChoices.includes(trade.stock));
 }

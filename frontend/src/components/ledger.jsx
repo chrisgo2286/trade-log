@@ -21,7 +21,15 @@ export default function Ledger() {
   const [filter, setFilter] = useState({
     show: false,
     submitted: false,
-    options: {},
+    options: {
+      choice1: '',
+      choice2: '',
+      choice3: '',
+      minPrice: '',
+      maxPrice: '',
+      startDate: '',
+      endDate: '',
+    },
   })
 
   function handleTrades () {

@@ -27,7 +27,15 @@ export default function TradeFilter(props) {
 
   function clearFilter() {
     setFilter(filter => {
-      return { ...filter, show: false, submitted: false, options: {} }
+      return { ...filter, show: false, submitted: false, options: {
+        choice1: '',
+        choice2: '',
+        choice3: '',
+        minPrice: '',
+        maxPrice: '',
+        startDate: '',
+        endDate: '',
+      }}
     })
     closeModal();
   }
@@ -48,18 +56,18 @@ export default function TradeFilter(props) {
           <div className='filter-header'>STOCKS</div>
           <div className='filter-inputs'>
             { [1, 2, 3].map((ndx) => (
-              <StockSelect key={ ndx } name={ 'choice-' + ndx } trades={ trades } onChange={ handleChange } />
+              <StockSelect key={ ndx } name={ 'choice' + ndx } onChange={ handleChange } />
             ))}
           </div>
           <div className='filter-header'>PRICE RANGE</div>
           <div className='filter-inputs'>
-            <input type='number' name='min-price' placeholder='Min Price' onChange={ handleChange } />
-            <input type='number' name='max-price' placeholder='Max Price' onChange={ handleChange } />
+            <input type='number' name='minPrice' placeholder='Min Price' onChange={ handleChange } value={ filter.options.minPrice } />
+            <input type='number' name='maxPrice' placeholder='Max Price' onChange={ handleChange } value={ filter.options.maxPrice } />
           </div>
           <div className='filter-header'>DATE RANGE</div>
           <div className='filter-inputs'>
-            <input type='date' name='start-date' placeholder='Start Date' onChange={ handleChange } />
-            <input type='date' name='end-date' placeholder='End Date' onChange={ handleChange } />
+            <input type='date' name='startDate' placeholder='Start Date' onChange={ handleChange } value={ filter.options.startDate }/>
+            <input type='date' name='endDate' placeholder='End Date' onChange={ handleChange } value={ filter.options.endDate }/>
           </div>
         </div>
         <div className='modal-btns'>
@@ -72,14 +80,18 @@ export default function TradeFilter(props) {
 }
 
 function StockSelect (props) {
+  const trades = useContext(TradeContext);
+  const filter = useContext(FilterContext)[0];
+  const setFilter = useContext(FilterContext)[1];
+
   function handleChange (event) {
     props.onChange(event);
   }
 
   return (
-    <select name={ props.name } onChange={ handleChange }>
+    <select name={ props.name } onChange={ handleChange } value={ filter.options[props.name] }>
       <option value=''></option>
-      { props.trades.tradeList.map((trade) => (
+      { trades.tradeList.map((trade) => (
         <option key={ trade.id } value={ trade.stock }>{ trade.stock }</option>
       ))}
     </select>
