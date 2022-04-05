@@ -6,6 +6,7 @@ import Ledger from './components/ledger';
 import Portfolio from './components/portfolio';
 import Analysis from './components/analysis';
 import LogIn from './components/login';
+import Register from './components/register';
 import { TradeContext, UserContext } from './index.js';
 import axios from 'axios';
 import './styles/App.css';
@@ -30,7 +31,8 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <TradeContext.Provider value={ trades }>  
+      <TradeContext.Provider value={ trades }>
+      <UserContext.Provider value={ [user, setUser] }>  
         <Router>
           <NavBar />
           <Routes>
@@ -51,8 +53,13 @@ export default function App() {
               path='/login' 
               element={ <LogIn /> } 
             />
+            <Route 
+              path='/register' 
+              element={ <Register /> } 
+            />
           </Routes>
         </Router>
+      </UserContext.Provider>  
       </TradeContext.Provider>
     </React.Fragment>
   );
