@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 export const TradeContext = createContext();
 export const FilterContext = createContext();
 export const SortContext = createContext();
+export const UserContext = createContext();
 
 ReactDOM.render(
   <React.StrictMode>

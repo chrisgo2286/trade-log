@@ -5,13 +5,13 @@ export default function tradeInput(props) {
     props.onChange(event);
   }
 
-  function handleLable () {
+  function handleLabel () {
     return props.name[0].toUpperCase() + props.name.slice(1,);
   }
 
   return (
     <div className='trade-input'>
-      <label htmlFor={ props.name }>{ handleLable() }</label>
+      <label htmlFor={ props.name }>{ handleLabel() }</label>
       <input
         type={ props.type } 
         name={ props.name } 

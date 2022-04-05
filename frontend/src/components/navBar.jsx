@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css'
 
-function NavBar() {
+export default function NavBar() {
   return (
     <nav>
       <div className='site-links'>    
@@ -13,11 +13,8 @@ function NavBar() {
       </div>
       <div className="user-links">
         <span>Hello Christian!</span>
-        <Link to='/'>LOG OUT</Link>
+        <Link to='/login'>LOG IN</Link>
       </div>
     </nav>
   )
 }
-
-
-export default NavBar;
