@@ -8,6 +8,10 @@ import ValidationErrors from './validationErrors';
 import { validate } from '../miscScripts/validator';
 
 export default function NewTrade(props) {
+  axios.defaults.withCredentials = true
+  axios.defaults.xsrfCookieName = 'csrftoken'
+  axios.defaults.xsrfHeaderName = 'x-csrftoken'
+
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
     stock: '',
@@ -32,7 +36,17 @@ export default function NewTrade(props) {
       comment: '',   
     })
   }
-  
+
+  function logIn () {
+    console.log('Logging In')
+    const userData = {
+      username: 'christian',
+      password: 'rachel02',
+    }
+    axios.post('/api/accounts/login/', userData)
+      .then(response => (
+        console.log(response)))
+  }
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
@@ -102,6 +116,7 @@ export default function NewTrade(props) {
           <div className='modal-btns'>
             <Button onClick={ handleSubmit }>Save</Button>
             <Button onClick={ closeModal }>Close</Button>
+            <Button onClick={ logIn }>Log In</Button>
           </div>
         </form>
       </div>
