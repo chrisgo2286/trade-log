@@ -6,13 +6,18 @@ import Ledger from './components/ledger';
 import Portfolio from './components/portfolio';
 import Analysis from './components/analysis';
 import LogIn from './components/login';
+import LogOut from './components/logout';
 import Register from './components/register';
 import { TradeContext, UserContext } from './index.js';
 import axios from 'axios';
 import './styles/App.css';
 
 export default function App() {
+  // axios.defaults.withCredentials = true
+  // axios.defaults.xsrfCookieName = 'csrftoken'
+  // axios.defaults.xsrfHeaderName = 'x-csrftoken'
 
+  let token = localStorage.getItem('token');
   const fetchData = async () => {
     const result = await axios.get('/api/trades/',);
     setTrades({ ...trades, tradeList: result.data });
@@ -20,9 +25,9 @@ export default function App() {
 
   const [trades, setTrades] = useState({tradeList:[], refresh: fetchData});
   const [user, setUser] = useState({
-    isLoggedIn: false,
-    token: '',
-    firstName: '',
+    isLoggedIn: (token) ? true: false,
+    token: (token) ? token: '',
+    username: '',
   })
 
   useEffect(() => {
@@ -52,6 +57,10 @@ export default function App() {
             <Route 
               path='/login' 
               element={ <LogIn /> } 
+            />
+            <Route 
+              path='/logout' 
+              element={ <LogOut /> } 
             />
             <Route 
               path='/register' 

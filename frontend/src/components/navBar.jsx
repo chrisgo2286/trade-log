@@ -1,13 +1,18 @@
 import React, { Component, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../index';
-import '../styles/navbar.css'
+import LogOut from './logout';
+import '../styles/navbar.css';
 
 export default function NavBar() {
   const user = useContext(UserContext)[0];
 
   function handleGreeting () {
-    return (user.isLoggedIn) ? user.firstName: <Link to='/register'>REGISTER</Link>;
+    return (user.isLoggedIn) ? 'Hi ' + user.username: <Link to='/register'>REGISTER</Link>;
+  }
+
+  function handleUserStatus () {
+    return (user.isLoggedIn) ? <LogOut />: <Link to='/login'>LOG IN</Link>
   }
 
   return (
@@ -20,7 +25,7 @@ export default function NavBar() {
       </div>
       <div className="user-links">
         <span>{ handleGreeting() }</span>
-        <Link to='/login'>LOG IN</Link>
+        { handleUserStatus() } 
       </div>
     </nav>
   )

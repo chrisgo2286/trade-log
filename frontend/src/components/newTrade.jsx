@@ -8,10 +8,6 @@ import ValidationErrors from './validationErrors';
 import { validate } from '../miscScripts/validator';
 
 export default function NewTrade(props) {
-  axios.defaults.withCredentials = true
-  axios.defaults.xsrfCookieName = 'csrftoken'
-  axios.defaults.xsrfHeaderName = 'x-csrftoken'
-
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
     stock: '',

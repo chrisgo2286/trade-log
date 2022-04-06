@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
+import { UserContext } from '../index';
 
 export default function LogIn (props) {
+  const user = useContext(UserContext)[0];
+  const setUser = useContext(UserContext)[1];
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -23,10 +26,41 @@ export default function LogIn (props) {
       return { ...credentials, [name]: value}}
     )
   }  
+  
   function handleLogin () {
-    console.log(credentials)
+    const userData = {
+      username: credentials.username,
+      password: credentials.password,
+    }
+    
+    axios.post('/api/accounts/login/', userData)
+      .then(response => {
+        console.log(response)
+        
+        if(response.status === 200) {
+          const token = response.data.key;
+          localStorage.setItem('token', token);
+          setUser(user => {
+            return { 
+              ...user,
+              isLoggedIn: true,
+              token: token, 
+              username: credentials.username, 
+            }
+          })
+        }
+    })
+    
+
+
+    setCredentials({
+      username: '',
+      password: ''
+    })
+
     closeModal();
   }
+
   return (
     <Modal showModal={ true } exitModal={ closeModal }>
       <div className='login'>
