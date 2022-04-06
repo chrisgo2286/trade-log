@@ -40,6 +40,7 @@ export default function LogIn (props) {
         if(response.status === 200) {
           const token = response.data.key;
           localStorage.setItem('token', token);
+          localStorage.setItem('username', credentials.username);
           setUser(user => {
             return { 
               ...user,

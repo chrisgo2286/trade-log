@@ -18,6 +18,8 @@ export default function App() {
   // axios.defaults.xsrfHeaderName = 'x-csrftoken'
 
   let token = localStorage.getItem('token');
+  let username = localStorage.getItem('username');
+
   const fetchData = async () => {
     const result = await axios.get('/api/trades/',);
     setTrades({ ...trades, tradeList: result.data });
@@ -27,7 +29,7 @@ export default function App() {
   const [user, setUser] = useState({
     isLoggedIn: (token) ? true: false,
     token: (token) ? token: '',
-    username: '',
+    username: (username) ? username: '',
   })
 
   useEffect(() => {

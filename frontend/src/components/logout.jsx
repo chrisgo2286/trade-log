@@ -15,11 +15,12 @@ export default function LogOut () {
 
       localStorage.setItem('token', '');
       let token = localStorage.getItem('token');
+      let username = localStorage.getItem('username');
 
       setUser({
         isLoggedIn: (token) ? true: false,
         token: (token) ? token: '',
-        username: '',
+        username: (username) ? username: '',
       });
     }
   }
