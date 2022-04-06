@@ -25,6 +25,6 @@ export default function LogOut () {
   }
 
   return (
-    <span onClick={ handleLogOut }>LOG OUT</span>
+    <a className='logout' onClick={ handleLogOut }>LOG OUT</a>
   )
 }

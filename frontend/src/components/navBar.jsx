@@ -8,9 +8,12 @@ export default function NavBar() {
   const user = useContext(UserContext)[0];
 
   function handleGreeting () {
-    return (user.isLoggedIn) ? 'Hi ' + user.username: <Link to='/register'>REGISTER</Link>;
+    return (user.isLoggedIn) ? createGreeting(): <Link to='/register'>REGISTER</Link>;
   }
 
+  function createGreeting () {
+    return 'Hi ' + user.username.slice(0,1).toUpperCase() + user.username.slice(1);
+  }
   function handleUserStatus () {
     return (user.isLoggedIn) ? <LogOut />: <Link to='/login'>LOG IN</Link>
   }

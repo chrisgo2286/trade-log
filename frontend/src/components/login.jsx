@@ -50,8 +50,6 @@ export default function LogIn (props) {
           })
         }
     })
-    
-
 
     setCredentials({
       username: '',

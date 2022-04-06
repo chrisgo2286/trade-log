@@ -8,10 +8,22 @@ nav {
 }
   
 nav a {
-  margin: 0px 30px;
+  margin: 0px 20px;
   text-decoration: none;
 }
   
 nav a:hover {
   color: var(--navBarLinkHover);
+}
+
+.user-links span {
+  margin: 0px 20px;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+.logout a:hover {
+  color: var(--navBarLinkHover);  
 }
