@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
-import { UserContext } from '../index';
+import { UserContext, TradeContext } from '../index';
 
 export default function LogIn (props) {
+  const trades = useContext(TradeContext);
   const user = useContext(UserContext)[0];
   const setUser = useContext(UserContext)[1];
   const [credentials, setCredentials] = useState({
@@ -49,6 +50,8 @@ export default function LogIn (props) {
               username: credentials.username, 
             }
           })
+          trades.refresh();
+
         }
     })
 

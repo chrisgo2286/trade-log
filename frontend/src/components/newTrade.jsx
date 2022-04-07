@@ -117,7 +117,6 @@ export default function NewTrade(props) {
           <div className='modal-btns'>
             <Button onClick={ handleSubmit }>Save</Button>
             <Button onClick={ closeModal }>Close</Button>
-            <Button onClick={ logIn }>Log In</Button>
           </div>
         </form>
       </div>
