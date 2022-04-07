@@ -33,7 +33,9 @@ export default function App() {
   })
 
   useEffect(() => {
-    fetchData();
+    if(token) {
+      fetchData();
+    }
   },[]);
 
   return (
