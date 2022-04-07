@@ -8,3 +8,6 @@ from .models import Trade
 class TradeView(viewsets.ModelViewSet):
     serializer_class = TradeSerializer
     queryset = Trade.objects.all()
+
+    def perform_create(self, serializer):
+        return serializer.save(owner=self.request.user)

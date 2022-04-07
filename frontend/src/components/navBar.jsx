@@ -1,8 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/navbar.css'
+import { UserContext } from '../index';
+import LogOut from './logout';
+import '../styles/navbar.css';
 
-function NavBar() {
+export default function NavBar() {
+  const user = useContext(UserContext)[0];
+
+  function handleGreeting () {
+    return (user.isLoggedIn) ? createGreeting(): <Link to='/register'>REGISTER</Link>;
+  }
+
+  function createGreeting () {
+    return 'Hi ' + user.username.slice(0,1).toUpperCase() + user.username.slice(1);
+  }
+  function handleUserStatus () {
+    return (user.isLoggedIn) ? <LogOut />: <Link to='/login'>LOG IN</Link>
+  }
+
   return (
     <nav>
       <div className='site-links'>    
@@ -12,12 +27,9 @@ function NavBar() {
         <Link to='/analysis'>ANALYSIS</Link>
       </div>
       <div className="user-links">
-        <span>Hello Christian!</span>
-        <Link to='/'>LOG OUT</Link>
+        <span>{ handleGreeting() }</span>
+        { handleUserStatus() } 
       </div>
     </nav>
   )
 }
-
-
-export default NavBar;
