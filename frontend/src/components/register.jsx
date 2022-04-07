@@ -10,7 +10,6 @@ export default function Register (props) {
   const setUser = useContext(UserContext)[1];
   const [credentials, setCredentials] = useState({
     username: '',
-    email: '',
     password1: '',
     password2: '',
   })
@@ -29,8 +28,32 @@ export default function Register (props) {
     )
   }
   
-  function handleRegister(event) {
-    console.log(event)
+  function handleRegister() {
+    axios.post('api/accounts/registration/', credentials)
+      .then(response => {
+        console.log(response)
+
+        if(response.status === 201) {
+          const token = response.data.key;
+          localStorage.setItem('token', token);
+          localStorage.setItem('username', credentials.username);
+          setUser(user => {
+            return { 
+              ...user,
+              isLoggedIn: true,
+              token: token, 
+              username: credentials.username, 
+            }
+          })
+        }
+      })
+    setCredentials({
+      username: '',
+      password1: '',
+      password2: '',
+    })
+    
+    closeModal();
   }
   
   return (
@@ -40,10 +63,10 @@ export default function Register (props) {
           <label htmlFor='username'>USERNAME</label>
           <input type='text' name='username' value={ credentials.username } onChange={ handleChange } />
         </div>
-        <div className='username-input'>
+        {/* <div className='username-input'>
           <label htmlFor='username'>E-MAIL</label>
           <input type='text' name='email' value={ credentials.email } onChange={ handleChange } />
-        </div>
+        </div> */}
         <div className='password-input'>
           <label htmlFor='password'>PASSWORD</label>
           <input type='password' name='password1' value={ credentials.password1 } onChange={ handleChange } />
