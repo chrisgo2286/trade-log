@@ -13,9 +13,9 @@ import axios from 'axios';
 import './styles/App.css';
 
 export default function App() {
-  // axios.defaults.withCredentials = true
-  // axios.defaults.xsrfCookieName = 'csrftoken'
-  // axios.defaults.xsrfHeaderName = 'x-csrftoken'
+  axios.defaults.withCredentials = true
+  axios.defaults.xsrfCookieName = 'csrftoken'
+  axios.defaults.xsrfHeaderName = 'x-csrftoken'
 
   let token = localStorage.getItem('token');
   let username = localStorage.getItem('username');
