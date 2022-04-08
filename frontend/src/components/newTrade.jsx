@@ -39,7 +39,12 @@ export default function NewTrade(props) {
       username: 'christian',
       password: 'rachel02',
     }
-    axios.post('/api/accounts/login/', userData)
+
+    axios.post('/api/accounts/login/', userData, { 
+      headers: {
+        'Authorization': 'Token 95c40d641fcf2b4c2d1d6a469236c6ed4796d2ff'
+      }
+    })
       .then(response => (
         console.log(response)))
   }
@@ -112,7 +117,6 @@ export default function NewTrade(props) {
           <div className='modal-btns'>
             <Button onClick={ handleSubmit }>Save</Button>
             <Button onClick={ closeModal }>Close</Button>
-            <Button onClick={ logIn }>Log In</Button>
           </div>
         </form>
       </div>

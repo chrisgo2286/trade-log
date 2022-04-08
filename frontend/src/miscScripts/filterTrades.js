@@ -1,5 +1,6 @@
 export function filterTrades (trades, options) {
-  trades = (options.choice1 | options.choice2 | options.choice3) ? filterByStocks(trades, options): trades;
+  console.log(options)
+  trades = (options.choice1 !== ''| options.choice2 !== ''| options.choice3 !== '') ? filterByStocks(trades, options): trades;
   trades = (options.minPrice | options.maxPrice) ? filterByPrice(trades, options): trades;
   trades = (options.startDate !== ''| options.endDate !== '') ? filterByDate(trades, options): trades;
   return trades;
