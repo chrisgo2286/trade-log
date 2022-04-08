@@ -7,6 +7,7 @@ import Button from './button';
 import TradeFilter from './tradeFilter';
 import { filterTrades } from '../miscScripts/filterTrades';
 import { sortTrades } from '../miscScripts/sortTrades';
+import { calcTotal } from '../miscScripts/calc';
 
 export default function Ledger() {
   const trades = useContext(TradeContext);
@@ -33,7 +34,8 @@ export default function Ledger() {
   })
 
   function handleTrades () {
-    const filteredTrades = (filter.submitted === true) ? filterTrades(trades.tradeList, filter.options): trades.tradeList;
+    const calcTrades = calcTotal(trades.tradeList);
+    const filteredTrades = (filter.submitted === true) ? filterTrades(calcTrades, filter.options): calcTrades;
     const sortedTrades = (sort.active === true) ? sortTrades(filteredTrades, sort.category, sort.type): filteredTrades;
     return sortedTrades;
   }

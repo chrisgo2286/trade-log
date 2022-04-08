@@ -20,11 +20,6 @@ export default function Trade(props) {
     setTradeClicked(!tradeClicked);
   }
 
-  function calcTotal () {
-    var total = props.trade.price * props.trade.shares + parseFloat(props.trade.commission)
-    return total.toFixed(2);
-  }
-
   return (
     <React.Fragment>
       <div 
@@ -37,7 +32,7 @@ export default function Trade(props) {
         <div>{ props.trade.price }</div>
         <div>{ props.trade.shares }</div>
         <div>{ props.trade.commission }</div>
-        <div>{ calcTotal() }</div>
+        <div>{ props.trade.total }</div>
         <div>{ props.trade.date }</div>
         <div>{ props.trade.comment }</div>
       </div>
