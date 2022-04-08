@@ -5,7 +5,7 @@ import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
 import ValidationErrors from './validationErrors';
-import { validate } from '../miscScripts/validator';
+import { validateTrade } from '../miscScripts/validator';
 
 export default function NewTrade(props) {
   const trades = useContext(TradeContext);
@@ -40,11 +40,7 @@ export default function NewTrade(props) {
       password: 'rachel02',
     }
 
-    axios.post('/api/accounts/login/', userData, { 
-      headers: {
-        'Authorization': 'Token 95c40d641fcf2b4c2d1d6a469236c6ed4796d2ff'
-      }
-    })
+    axios.post('/api/accounts/login/', userData)
       .then(response => (
         console.log(response)))
   }
@@ -65,7 +61,7 @@ export default function NewTrade(props) {
   }
 
   function validateFields() {
-    const fieldErrors = validate(fields);
+    const fieldErrors = validateTrade(fields);
     setFieldErrors(fieldErrors)
     return (Object.keys(fieldErrors).length > 0);
   }

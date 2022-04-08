@@ -5,14 +5,17 @@ import Button from './button';
 import Modal from './modal';
 import TradeInput from './tradeInput';
 import { UserContext, TradeContext } from '../index';
+import { validateLogin } from '../miscScripts/validator';
+import ValidationErrors from './validationErrors';
 
 export default function LogIn (props) {
   const trades = useContext(TradeContext);
   const user = useContext(UserContext)[0];
   const setUser = useContext(UserContext)[1];
+  const [fieldErrors, setFieldErrors] = useState({});
   const [credentials, setCredentials] = useState({
     username: '',
-    password: '',
+    password1: '',
   })
 
   const navigate = useNavigate();
@@ -30,9 +33,11 @@ export default function LogIn (props) {
   }  
   
   function handleLogin () {
+    if(validateFields()) return;
+
     const userData = {
       username: credentials.username,
-      password: credentials.password,
+      password: credentials.password1,
     }
     
     axios.post('/api/accounts/login/', userData)
@@ -58,10 +63,16 @@ export default function LogIn (props) {
 
     setCredentials({
       username: '',
-      password: ''
+      password1: ''
     })
 
     closeModal();
+  }
+
+  function validateFields() {
+    const fieldErrors = validateLogin(credentials);
+    setFieldErrors(fieldErrors)
+    return (Object.keys(fieldErrors).length > 0);
   }
 
   return (
@@ -76,11 +87,12 @@ export default function LogIn (props) {
           value={ credentials.username }
           onChange={ handleChange } />
         <TradeInput 
-          name='password'
+          name='password1'
           type='password'
           value={ credentials.password }
           onChange={ handleChange } />
       </div>
+      <ValidationErrors errors={ Object.values(fieldErrors) }/>
       <div className="modal-btns">  
         <Button onClick={ handleLogin }>LOG IN</Button>
         <Button onClick={ closeModal }>Exit</Button>

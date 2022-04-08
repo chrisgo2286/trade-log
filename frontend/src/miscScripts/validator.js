@@ -1,6 +1,6 @@
 import validator from 'validator';
 
-export function validate(fields) {
+export function validateTrade(fields) {
   var fieldErrors = {};
 
   if(fields.stock === '') {
@@ -24,4 +24,32 @@ export function validate(fields) {
   }
 
   return fieldErrors;  
+}
+
+export function validateRegistration(fields) {
+  var fieldErrors = validateLogin(fields);
+  
+  if(fields.password2 === '' && fields.password1) {
+    fieldErrors.password2 = 'Please retype your password!'
+  }
+
+  if(fields.password1 !== fields.password2) {
+    fieldErrors.passwordMatch = 'The passwords are not a match!'
+  }
+
+  return fieldErrors;  
+}
+
+export function validateLogin(fields) {
+  var fieldErrors = {};
+
+  if(fields.username === '') {
+    fieldErrors.username = 'Please enter a valid username!';
+  }
+
+  if(fields.password1 === '') {
+    fieldErrors.password1 = 'Please enter a valid password!';
+  }
+
+  return fieldErrors;
 }

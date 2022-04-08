@@ -5,7 +5,7 @@ import { TradeContext } from '../index.js';
 import Button from './button';
 import Modal from './modal';
 import ValidationErrors from './validationErrors';
-import { validate } from '../miscScripts/validator';
+import { validateTrade } from '../miscScripts/validator';
 
 export default function TradeUpdate(props) {
   const trades = useContext(TradeContext);
@@ -52,7 +52,7 @@ export default function TradeUpdate(props) {
   }
 
   function validateFields() {
-    const fieldErrors = validate(fields);
+    const fieldErrors = validateTrade(fields);
     setFieldErrors(fieldErrors)
     return (Object.keys(fieldErrors).length > 0);
   }

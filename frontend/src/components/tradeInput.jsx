@@ -21,4 +21,5 @@ export default function tradeInput(props) {
       />
     </div>
   )
-} 
+}
+

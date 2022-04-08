@@ -5,10 +5,13 @@ import Button from './button';
 import Modal from './modal';
 import TradeInput from './tradeInput';
 import { UserContext } from '../index';
+import { validateRegistration } from '../miscScripts/validator';
+import ValidationErrors from './validationErrors';
 
 export default function Register (props) {
   const user = useContext(UserContext)[0];
   const setUser = useContext(UserContext)[1];
+  const [fieldErrors, setFieldErrors] = useState({});
   const [credentials, setCredentials] = useState({
     username: '',
     password1: '',
@@ -30,6 +33,8 @@ export default function Register (props) {
   }
   
   function handleRegister() {
+    if(validateFields()) return;
+
     axios.post('api/accounts/registration/', credentials)
       .then(response => {
         console.log(response)
@@ -57,6 +62,12 @@ export default function Register (props) {
     closeModal();
   }
   
+  function validateFields() {
+    const fieldErrors = validateRegistration(credentials);
+    setFieldErrors(fieldErrors)
+    return (Object.keys(fieldErrors).length > 0);
+  }
+
   return (
     <Modal showModal={ true } exitModal={ closeModal }>
       <div className='modal-header'>
@@ -78,7 +89,8 @@ export default function Register (props) {
           type='password'
           value={ credentials.password2 }
           onChange={ handleChange } />
-      </div>  
+      </div>
+      <ValidationErrors errors={ Object.values(fieldErrors) }/>  
       <div className='modal-btns'>
         <Button onClick={ handleRegister }>REGISTER</Button>
         <Button onClick={ closeModal }>EXIT</Button>
