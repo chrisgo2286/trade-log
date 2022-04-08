@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
+import TradeInput from './tradeInput';
 import { UserContext, TradeContext } from '../index';
 
 export default function LogIn (props) {
@@ -65,18 +66,26 @@ export default function LogIn (props) {
 
   return (
     <Modal showModal={ true } exitModal={ closeModal }>
-      <div className='login'>
-      <div className='username-input'>
-        <label htmlFor='username'>USERNAME</label>
-        <input type='text' name='username' value={ credentials.username } onChange={ handleChange } />
+      <div className='modal-header'>
+        <div>LOG IN</div>
       </div>
-      <div className='password-input'>
-        <label htmlFor='password'>PASSWORD</label>
-        <input type='password' name='password' value={ credentials.password } onChange={ handleChange } />
+      <div className='modal-body'>
+        <TradeInput 
+          name='username'
+          type='text'
+          value={ credentials.username }
+          onChange={ handleChange } />
+        <TradeInput 
+          name='password'
+          type='password'
+          value={ credentials.password }
+          onChange={ handleChange } />
       </div>
+      <div className="modal-btns">  
         <Button onClick={ handleLogin }>LOG IN</Button>
         <Button onClick={ closeModal }>Exit</Button>
       </div>
+
     </Modal>
   )
 }

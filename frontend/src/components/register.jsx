@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from './button';
 import Modal from './modal';
+import TradeInput from './tradeInput';
 import { UserContext } from '../index';
 
 export default function Register (props) {
@@ -58,27 +59,29 @@ export default function Register (props) {
   
   return (
     <Modal showModal={ true } exitModal={ closeModal }>
-      <div className='register'>
-        <div className='username-input'>
-          <label htmlFor='username'>USERNAME</label>
-          <input type='text' name='username' value={ credentials.username } onChange={ handleChange } />
-        </div>
-        {/* <div className='username-input'>
-          <label htmlFor='username'>E-MAIL</label>
-          <input type='text' name='email' value={ credentials.email } onChange={ handleChange } />
-        </div> */}
-        <div className='password-input'>
-          <label htmlFor='password'>PASSWORD</label>
-          <input type='password' name='password1' value={ credentials.password1 } onChange={ handleChange } />
-        </div>
-        <div className='password-input'>
-          <label htmlFor='password'>RETYPE PASSWORD</label>
-          <input type='password' name='password2' value={ credentials.password2 } onChange={ handleChange } />
-        </div>
-        <div className='btns'>
-          <Button onClick={ handleRegister }>REGISTER</Button>
-          <Button onClick={ closeModal }>EXIT</Button>
-        </div>
+      <div className='modal-header'>
+        <div>REGISTER</div>
+      </div>
+      <div className="modal-body">
+        <TradeInput
+          name='username'
+          type='text'
+          value={ credentials.username }
+          onChange={ handleChange } />
+        <TradeInput
+          name='password1'
+          type='password'
+          value={ credentials.password1 }
+          onChange={ handleChange } />
+        <TradeInput
+          name='password2'
+          type='password'
+          value={ credentials.password2 }
+          onChange={ handleChange } />
+      </div>  
+      <div className='modal-btns'>
+        <Button onClick={ handleRegister }>REGISTER</Button>
+        <Button onClick={ closeModal }>EXIT</Button>
       </div>
     </Modal>
   )
