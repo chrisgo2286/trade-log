@@ -50,7 +50,7 @@ function TradeListHeaders() {
       <Header name='price' onClick={ handleSortClicked } />
       <Header name='shares' onClick={ handleSortClicked } />
       <Header name='commission' onClick={ handleSortClicked } />
-      <div name='total'>TOTAL</div>
+      <Header name='total' onClick={ handleSortClicked } />
       <Header name='date' onClick={ handleSortClicked } />
       <div name='comment'>COMMENT</div>
     </div>
