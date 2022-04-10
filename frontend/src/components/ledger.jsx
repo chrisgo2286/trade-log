@@ -55,15 +55,17 @@ export default function Ledger() {
   return(
     <FilterContext.Provider value={ [filter, setFilter] }>
     <SortContext.Provider value={ [sort, setSort] }>
-      <main className='ledger-container'>
-        <div className='ledger-btns'>
-          <Button onClick={ showFilter }>FILTER</Button>
-          <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>
-        </div>
-        <TradeList tradeList={ handleTrades() }/>
-        <NewTrade showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }/>
-        <TradeFilter />
-      </main>
+      <div className="container">
+        <main className='ledger'>
+          <div className='ledger-btns'>
+            <Button onClick={ showFilter }>FILTER</Button>
+            <Button onClick={ toggleNewTradeClicked }>+TRADE</Button>
+          </div>
+          <TradeList tradeList={ handleTrades() }/>
+          <NewTrade showModal={ newTradeClicked } exitModal={ toggleNewTradeClicked }/>
+          <TradeFilter />
+        </main>
+      </div>
     </SortContext.Provider> 
     </FilterContext.Provider>
   );

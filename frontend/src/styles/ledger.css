@@ -1,7 +1,7 @@
-.ledger-container {
+.ledger {
+  margin: 50px auto;
   border: 1px solid var(--siteBorderColor);
   max-width: 1000px;
-  margin: 50px;
 }
 
 .ledger-btns {
