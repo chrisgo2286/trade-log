@@ -9,10 +9,6 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.portfolio div {
-  border: 1px solid var(--siteBorderColor);
-}
-
 #chart1 {
   grid-area: chart1;
 }
@@ -29,6 +25,25 @@
   grid-area: chart4;
 }
 
-.data {
+.stock-summary {
   grid-area: data;
+  border: 1px solid var(--siteBorderColor);
+}
+
+.chart {
+  border: 1px solid var(--siteBorderColor);
+}
+
+.stock-summary-headers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 10px 0px;
+  height: 10px;
+  line-height: 10px;
+  background-color: var(--modalHeaderColor);
+  border: 1px solid var(--siteBorderColor);
+}
+
+.stock-summary-header {
+  text-align: center;
 }

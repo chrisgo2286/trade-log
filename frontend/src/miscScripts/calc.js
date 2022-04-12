@@ -8,3 +8,29 @@
     return calcTrades;
   }
   
+  //STOCK SUMMARY FUNCTIONS
+  export function calcStockSummary (trades) {
+    const stocks = uniqueStocks(trades);
+    const shares = calcTotalShares(trades, stocks);
+  }
+
+  export function uniqueStocks (trades) {
+    let stocks = []
+    for(let i=0; i<trades.length; i++) {
+      if (!stocks.includes(trades[i].stock)) {
+        stocks.push(trades[i].stock);
+      } 
+    }
+    return stocks;
+  }
+
+  function calcTotalShares (trades, stocks) {
+    stocks.forEach((stock) => totalShares(trades, stock))
+  }
+
+  function totalShares (trades, stock) {
+    const filteredTrades = trades.filter(trade => trade.stock === stock);
+    let total = 0;
+    filteredTrades.forEach(trade => (total += trade.shares));
+    return total;
+  }

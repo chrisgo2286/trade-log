@@ -1,4 +1,5 @@
 import React from 'react';
+import StockSummary from './stockSummary';
 import '../styles/portfolio.css';
 
 function Portfolio() {
@@ -17,7 +18,8 @@ function Portfolio() {
           <div className='chart' id="chart4">
             <div className="modal-header">CHART 4</div>
           </div>
-          <div className="data">
+          <div className="stock-summary">
+            <StockSummary />
           </div>
         </div>
       </div>
