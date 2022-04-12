@@ -3,6 +3,7 @@ import React from 'react';
 export default function StockSummary () {
   return (
     <StockSummaryHeaders />
+    
   )
 }
 
@@ -10,9 +11,10 @@ function StockSummaryHeaders () {
   return (
     <div className='stock-summary-headers'>
       <Header name='stock' />
-      <Header name='average price' />
-      <Header name='total shares' />
-      <Header name='profit/loss' />
+      <Header name='current' />
+      <Header name='average' />
+      <Header name='shares' />
+      <Header name='p/l' />
       <Header name='pl/share' />
     </div>
   )
