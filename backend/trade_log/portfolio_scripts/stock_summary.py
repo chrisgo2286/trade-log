@@ -22,6 +22,10 @@ class StockSummary(PortfolioSummary):
         super().__init__(owner)
         self.df = pd.DataFrame()
 
+    def get_data(self):
+        self.populate()
+        return self.df.to_dict('records')
+
     def populate(self):
         self.find_unique_stocks()
         self.find_total_shares()
@@ -30,7 +34,6 @@ class StockSummary(PortfolioSummary):
         self.find_market_price()
         self.find_profit_loss()
         self.find_pl_per_share()
-        print(self.df)
 
     def find_unique_stocks(self):
         df_sub = self.df_orig.drop_duplicates(subset=['stock'])

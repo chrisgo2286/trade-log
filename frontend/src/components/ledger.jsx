@@ -11,6 +11,7 @@ import { calcTotal } from '../miscScripts/calc';
 
 export default function Ledger() {
   const trades = useContext(TradeContext);
+  console.log(trades)
   const [newTradeClicked, setNewTradeClicked] = useState(false);
 
   const [sort, setSort] = useState({

@@ -10,9 +10,7 @@ export const SortContext = createContext();
 export const UserContext = createContext();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 );
 

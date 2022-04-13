@@ -33,6 +33,7 @@ export default function App() {
   })
 
   useEffect(() => {
+    
     if(token) {
       fetchData();
     }
@@ -41,7 +42,7 @@ export default function App() {
   return (
     <React.Fragment>
       <TradeContext.Provider value={ trades }>
-      <UserContext.Provider value={ [user, setUser] }>  
+      <UserContext.Provider value={ [user, setUser] }> 
         <Router>
           <NavBar />
           <Routes>

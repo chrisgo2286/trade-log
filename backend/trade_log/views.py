@@ -20,7 +20,10 @@ class TradeView(viewsets.ModelViewSet):
 
 @api_view(('GET',))
 def portfolio_view(request):
-    summary = StockSummary(owner=8)
-    summary.populate()
-    data = summary.df.to_dict('records')
+    data = {}
+
+    summary = StockSummary(owner=request.user)
+
+    data['stock_summary'] = summary.get_data()
+    
     return Response(data)
