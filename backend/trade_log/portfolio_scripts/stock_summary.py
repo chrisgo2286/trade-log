@@ -69,8 +69,9 @@ class StockSummary(PortfolioSummary):
 
     def calc_total_cost(self, stock):
         df_sub = self.df_orig[self.df_orig['stock'] == stock]
-        df_sub['total'] = df_sub['price'] * df_sub['shares'] + df_sub['commission']
-        return df_sub['total'].sum()
+        df_total = pd.DataFrame(columns=['total'])
+        df_total['total'] = df_sub['price'] * df_sub['shares'] + df_sub['commission']
+        return df_total['total'].sum()
 
     def pull_market_price(self, stock):
         return self.TICKERS[stock]
