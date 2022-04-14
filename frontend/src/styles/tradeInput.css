@@ -14,5 +14,6 @@
     width: 80%;
     height: 20px;
     margin: 5px 0px;
-    border: 1px solid var(--siteBorderColor)
+    border: 1px solid var(--siteBorderColor);
+    border-radius: 10px;
   }
