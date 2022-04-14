@@ -2,11 +2,16 @@
   margin: 50px auto;
   max-width: 1000px;
   display: grid;
-  grid-template-areas: 
-    'data data chart1'
-    'chart2 chart3 chart4';
-  grid-template-rows: 400px 400px;
+  grid-template-areas:
+    'btns btns btns' 
+    'chart1 overview chart2'
+    'data data chart3';
+  grid-template-rows: 50px 400px 400px;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ledger-btns {
+  grid-area: btns;
 }
 
 #chart1 {
@@ -21,8 +26,8 @@
   grid-area: chart3;
 }
 
-#chart4 {
-  grid-area: chart4;
+#overview {
+  grid-area: overview;
 }
 
 .stock-summary {
@@ -41,7 +46,7 @@
 .summary-items {
   display: flex;
   flex-direction: column;
-  height: 92%;
+  height: 100%;
   overflow-y: scroll;
 }
 
