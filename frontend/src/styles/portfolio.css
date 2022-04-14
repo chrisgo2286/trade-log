@@ -27,23 +27,48 @@
 
 .stock-summary {
   grid-area: data;
-  border: 1px solid var(--siteBorderColor);
 }
 
 .chart {
+}
+
+.chart-body {
   border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+  height: 100%;
+}
+
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  height: 92%;
+  overflow-y: scroll;
+}
+
+.stock-summary-headers, .summary-item {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 10px 0px 5px 25px;
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
 }
 
 .stock-summary-headers {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  padding: 10px 0px;
-  height: 10px;
-  line-height: 10px;
+  font-weight: bold;
+  height: 15px;
+  line-height: 15px;
   background-color: var(--modalHeaderColor);
-  border: 1px solid var(--siteBorderColor);
 }
 
-.stock-summary-header {
+.stock-summary-header, .summary-items div {
+  text-align: left;
+}
+
+.chart-header {
   text-align: center;
+  line-height: 30px;
+  height: 30px;
+  border-bottom: 1px solid var(--siteBorderColor);
+  background-color: var(--modalHeaderColor);
+  border-radius: 10px;
 }

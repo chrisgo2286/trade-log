@@ -28,7 +28,6 @@
   height: 25px;
   line-height: 25px;
   font-weight: bold;
-  border: 1px solid var(--siteBorderColor);
   background-color: var(--tradeListHeaderColor);
 }
 

@@ -5,16 +5,18 @@ export default function StockSummary (props) {
   return (
     <React.Fragment>
       <StockSummaryHeaders />
-      { props.data.map((stock, ndx) => (
-        <div key={ ndx } className="item">
-          <div>{ stock.stock }</div>
-          <div>{ stock.market }</div>
-          <div>{ stock.average }</div>
-          <div>{ stock.shares }</div>
-          <div>{ stock.pl }</div>
-          <div>{ stock.pl_per_share }</div>
-        </div>   
-      ))}
+      <div className='summary-items'>
+        { props.data.map((stock, ndx) => (
+          <div key={ ndx } className="summary-item">
+            <div>{ stock.stock }</div>
+            <div>{ stock.market.toFixed(2) }</div>
+            <div>{ stock.average.toFixed(2) }</div>
+            <div>{ stock.shares }</div>
+            <div>{ stock.pl.toFixed(2) }</div>
+            <div>{ stock.pl_per_share.toFixed(2) }</div>
+          </div>   
+        ))}
+      </div>
     </React.Fragment>
   )
 }
