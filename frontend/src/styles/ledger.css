@@ -1,12 +1,13 @@
 .ledger {
   margin: 50px auto;
-  border: 1px solid var(--siteBorderColor);
   max-width: 1000px;
 }
 
 .ledger-btns {
   height: 50px;
   line-height: 50px;
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
 }
 /* TRADELIST */
   
@@ -21,6 +22,7 @@
   grid-template-columns: repeat(7, 1fr);
   padding: 10px 0px 5px 25px;
   border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
   cursor: pointer;
 }
   

@@ -6,5 +6,6 @@
   line-height: 30px;
   margin: 0px 10px;
   border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
   cursor: pointer;
 }
