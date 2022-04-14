@@ -1,0 +1,74 @@
+.portfolio {
+  margin: 50px auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-areas: 
+    'data data chart1'
+    'chart2 chart3 chart4';
+  grid-template-rows: 400px 400px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#chart1 {
+  grid-area: chart1;
+}
+
+#chart2 {
+  grid-area: chart2;
+}
+
+#chart3 {
+  grid-area: chart3;
+}
+
+#chart4 {
+  grid-area: chart4;
+}
+
+.stock-summary {
+  grid-area: data;
+}
+
+.chart {
+}
+
+.chart-body {
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+  height: 100%;
+}
+
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  height: 92%;
+  overflow-y: scroll;
+}
+
+.stock-summary-headers, .summary-item {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 10px 0px 5px 25px;
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+}
+
+.stock-summary-headers {
+  font-weight: bold;
+  height: 15px;
+  line-height: 15px;
+  background-color: var(--modalHeaderColor);
+}
+
+.stock-summary-header, .summary-items div {
+  text-align: left;
+}
+
+.chart-header {
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  border-bottom: 1px solid var(--siteBorderColor);
+  background-color: var(--modalHeaderColor);
+  border-radius: 10px;
+}

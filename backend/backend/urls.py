@@ -9,6 +9,7 @@ router.register(r'trades', views.TradeView, 'trade')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/', include('trade_log.urls')),
     path('api/accounts/', include('accounts.urls')),
 ]
 

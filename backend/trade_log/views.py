@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework import viewsets
 from .serializers import TradeSerializer
 from .models import Trade
+from .portfolio_scripts.stock_summary import StockSummary
 
 # Create your views here.
 
@@ -15,3 +17,13 @@ class TradeView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.queryset.filter(owner=self.request.user)
+
+@api_view(('GET',))
+def portfolio_view(request):
+    data = {}
+
+    summary = StockSummary(owner=request.user)
+
+    data['stock_summary'] = summary.get_data()
+    
+    return Response(data)
