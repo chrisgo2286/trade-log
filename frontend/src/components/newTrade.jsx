@@ -11,7 +11,7 @@ import { validateTrade } from '../miscScripts/validator';
 export default function NewTrade(props) {
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
-    buy_sell: '',
+    buy_sell: 'BUY',
     stock: '',
     price: '',
     shares: '',
@@ -26,7 +26,7 @@ export default function NewTrade(props) {
     props.exitModal();
     setFieldErrors({});
     setFields({
-      buy_sell: '',
+      buy_sell: 'BUY',
       stock: '',
       price: '',
       shares: '',
@@ -58,6 +58,7 @@ export default function NewTrade(props) {
     return (Object.keys(fieldErrors).length > 0);
   }
 
+  console.log(fields)
   return(
     <Modal showModal={ props.showModal } exitModal={ closeModal }>
       <div className='modal-header'>
@@ -65,7 +66,7 @@ export default function NewTrade(props) {
       </div>
       <div className="modal-body">
         <form>
-          <RadioButtons />
+          <RadioButtons onChange={ handleChange }/>
           <TradeInput 
             name='stock'
             type='text'

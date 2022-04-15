@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function RadioButtons () {
+export default function RadioButtons (props) {
   const [btn, setBtn] = useState({
     click: 'BUY',
     hover: '',      
@@ -34,11 +34,15 @@ export default function RadioButtons () {
     }
   }
 
-  function toggleBuyClick () {
+  function handleBuyClick () {
+    const event = {target: {'name': 'buy_sell', 'value': 'BUY'}}
+    props.onChange(event)
     setBtn({ ...btn, click: 'BUY' })
   }
 
-  function toggleSellClick () {
+  function handleSellClick () {
+    const event = {target: {'name': 'buy_sell', 'value': 'SELL'}}
+    props.onChange(event)
     setBtn({ ...btn, click: 'SELL' })  
   }
 
@@ -49,7 +53,7 @@ export default function RadioButtons () {
         className={ handleBuyClass() }
         onMouseEnter={ toggleBuyHover } 
         onMouseLeave={ toggleBuyHover }
-        onClick={ toggleBuyClick }>
+        onClick={ handleBuyClick }>
         BUY
       </span>
       <span
@@ -57,7 +61,7 @@ export default function RadioButtons () {
         className={ handleSellClass() }
         onMouseEnter={ toggleSellHover } 
         onMouseLeave={ toggleSellHover }
-        onClick={ toggleSellClick }>
+        onClick={ handleSellClick }>
         SELL
       </span>
     </div>
