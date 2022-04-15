@@ -3,6 +3,7 @@ import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
 import axios from 'axios';
 import Button from './button';
+import RadioButtons from './radioButtons';
 import Modal from './modal';
 import ValidationErrors from './validationErrors';
 import { validateTrade } from '../miscScripts/validator';
@@ -10,6 +11,7 @@ import { validateTrade } from '../miscScripts/validator';
 export default function NewTrade(props) {
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
+    buy_sell: '',
     stock: '',
     price: '',
     shares: '',
@@ -24,6 +26,7 @@ export default function NewTrade(props) {
     props.exitModal();
     setFieldErrors({});
     setFields({
+      buy_sell: '',
       stock: '',
       price: '',
       shares: '',
@@ -33,17 +36,6 @@ export default function NewTrade(props) {
     })
   }
 
-  function logIn () {
-    console.log('Logging In')
-    const userData = {
-      username: 'christian',
-      password: 'rachel02',
-    }
-
-    axios.post('/api/accounts/login/', userData)
-      .then(response => (
-        console.log(response)))
-  }
   function handleChange(event) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
@@ -72,7 +64,8 @@ export default function NewTrade(props) {
         <div>NEW TRADE</div>
       </div>
       <div className="modal-body">
-        <form onSubmit={ handleSubmit }>
+        <form>
+          <RadioButtons />
           <TradeInput 
             name='stock'
             type='text'
