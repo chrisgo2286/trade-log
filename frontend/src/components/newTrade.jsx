@@ -26,7 +26,7 @@ export default function NewTrade(props) {
     props.exitModal();
     setFieldErrors({});
     setFields({
-      buy_sell: 'BUY',
+      ...fields, 
       stock: '',
       price: '',
       shares: '',
@@ -58,7 +58,6 @@ export default function NewTrade(props) {
     return (Object.keys(fieldErrors).length > 0);
   }
 
-  console.log(fields)
   return(
     <Modal showModal={ props.showModal } exitModal={ closeModal }>
       <div className='modal-header'>
