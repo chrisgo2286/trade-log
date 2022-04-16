@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function RadioButtons (props) {
   const [btn, setBtn] = useState({
-    click: 'BUY',
+    click: props.buy_sell,
     hover: '',      
   })
   

@@ -65,7 +65,7 @@ export default function NewTrade(props) {
       </div>
       <div className="modal-body">
         <form>
-          <RadioButtons onChange={ handleChange }/>
+          <RadioButtons buy_sell={ fields.buy_sell } onChange={ handleChange }/>
           <TradeInput 
             name='stock'
             type='text'

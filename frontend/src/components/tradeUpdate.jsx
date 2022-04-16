@@ -12,6 +12,7 @@ export default function TradeUpdate(props) {
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
     id: props.trade.id,
+    buy_sell: props.trade.buy_sell,
     stock: props.trade.stock,
     price: props.trade.price,
     shares: props.trade.shares,
@@ -73,7 +74,7 @@ export default function TradeUpdate(props) {
         <div>UPDATE TRADE</div>
       </div>
       <form>
-        <RadioButtons onChange={ handleChange }/>
+        <RadioButtons buy_sell={ fields.buy_sell } onChange={ handleChange }/>
         <TradeInput 
           name='stock'
           type='text'
