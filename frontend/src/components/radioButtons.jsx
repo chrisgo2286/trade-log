@@ -8,13 +8,13 @@ export default function RadioButtons (props) {
   
   function handleBuyClass () {
     const hover = (btn.hover === 'BUY') ? 'hover ': '';
-    const click = (btn.click === 'BUY') ? 'click ': '';
+    const click = (btn.click === 'BUY' | btn.click === 'BUY_SELL') ? 'click ': '';
     return 'btn ' + hover + click;
   }
 
   function handleSellClass () {
     const hover = (btn.hover === 'SELL') ? 'hover ': '';
-    const click = (btn.click === 'SELL') ? 'click ': '';
+    const click = (btn.click === 'SELL' | btn.click === 'BUY_SELL') ? 'click ': '';
     return 'btn ' + hover + click;
   }
 
@@ -34,16 +34,25 @@ export default function RadioButtons (props) {
     }
   }
 
-  function handleBuyClick () {
-    const event = {target: {'name': 'buy_sell', 'value': 'BUY'}}
+  function handleClick (event) {
+    let value = event.target.innerText;
+    value = (props.filter === true) ? findValueForFilter(value): value;
+    event = {target: {'name': 'buy_sell', 'value': value}}
     props.onChange(event)
-    setBtn({ ...btn, click: 'BUY' })
+    setBtn({ ...btn, click: value })
   }
 
-  function handleSellClick () {
-    const event = {target: {'name': 'buy_sell', 'value': 'SELL'}}
-    props.onChange(event)
-    setBtn({ ...btn, click: 'SELL' })  
+  function findValueForFilter (value) {
+    switch(true) {
+      case (btn.click === value):
+        return '';
+      case (btn.click === ''):
+        return value;
+      case (btn.click === 'BUY_SELL'):
+        return (value === 'BUY') ? 'SELL': 'BUY';
+      default:
+        return 'BUY_SELL'
+    }
   }
 
   return (
@@ -53,7 +62,7 @@ export default function RadioButtons (props) {
         className={ handleBuyClass() }
         onMouseEnter={ toggleBuyHover } 
         onMouseLeave={ toggleBuyHover }
-        onClick={ handleBuyClick }>
+        onClick={ handleClick }>
         BUY
       </span>
       <span
@@ -61,7 +70,7 @@ export default function RadioButtons (props) {
         className={ handleSellClass() }
         onMouseEnter={ toggleSellHover } 
         onMouseLeave={ toggleSellHover }
-        onClick={ handleSellClick }>
+        onClick={ handleClick }>
         SELL
       </span>
     </div>

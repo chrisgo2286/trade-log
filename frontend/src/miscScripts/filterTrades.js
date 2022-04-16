@@ -1,7 +1,18 @@
 export function filterTrades (trades, options) {
+  trades = (options.buy_sell !== '' | options.buy_sell !== 'BUY_SELL') ? filterByBuySell(trades, options): trades;
   trades = (options.choice1 !== ''| options.choice2 !== ''| options.choice3 !== '') ? filterByStocks(trades, options): trades;
   trades = (options.minPrice | options.maxPrice) ? filterByPrice(trades, options): trades;
   trades = (options.startDate !== ''| options.endDate !== '') ? filterByDate(trades, options): trades;
+  return trades;
+}
+
+function filterByBuySell (trades, options) {
+  if(options.buy_sell === 'BUY') {
+    trades = trades.filter(trade => trade.buy_sell === 'BUY')
+  }
+  if(options.buy_sell === 'SELL') {
+    trades = trades.filter(trade => trade.buy_sell === 'SELL')
+  }
   return trades;
 }
 

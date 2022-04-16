@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Button from './button';
+import RadioButtons from './radioButtons';
 import Modal from './modal';
 import { FilterContext, TradeContext } from '../index';
 import Trade from './trade';
@@ -28,6 +29,7 @@ export default function TradeFilter(props) {
   function clearFilter() {
     setFilter(filter => {
       return { ...filter, show: false, submitted: false, options: {
+        buy_sell: '',
         choice1: '',
         choice2: '',
         choice3: '',
@@ -52,6 +54,7 @@ export default function TradeFilter(props) {
         <div>TRADE FILTERS</div>
       </div>
       <div className="modal-body">
+        <RadioButtons buy_sell={ filter.options.buy_sell } onChange={ handleChange } filter={ true } />
         <div className='trade-filters'>
           <div className='filter-header'>STOCKS</div>
           <div className='filter-inputs'>

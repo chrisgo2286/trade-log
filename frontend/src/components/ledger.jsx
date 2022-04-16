@@ -23,6 +23,7 @@ export default function Ledger() {
     show: false,
     submitted: false,
     options: {
+      buy_sell: '',
       choice1: '',
       choice2: '',
       choice3: '',
