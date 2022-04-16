@@ -9,7 +9,7 @@
   --errorColor: rgba(255, 0, 0, .25);
   --filterHeaderColor: rgba(187, 218, 195, 0.5);
   --buyColor: var(--hoverColor);
-  --sellColor: rgba(163, 209, 159, .3);
+  --sellColor: rgba(137, 204, 131, 0.3);
 }
 * {
   margin: 0px;

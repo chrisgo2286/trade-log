@@ -3,6 +3,7 @@ import axios from 'axios';
 import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
 import Button from './button';
+import RadioButtons from './radioButtons';
 import Modal from './modal';
 import ValidationErrors from './validationErrors';
 import { validateTrade } from '../miscScripts/validator';
@@ -71,7 +72,8 @@ export default function TradeUpdate(props) {
       <div className='modal-header'>
         <div>UPDATE TRADE</div>
       </div>
-      <form onSubmit={ handleSubmit }>
+      <form>
+        <RadioButtons onChange={ handleChange }/>
         <TradeInput 
           name='stock'
           type='text'
