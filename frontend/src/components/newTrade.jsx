@@ -26,7 +26,8 @@ export default function NewTrade(props) {
     props.exitModal();
     setFieldErrors({});
     setFields({
-      ...fields, 
+      ...fields,
+      buy_sell: 'BUY', 
       stock: '',
       price: '',
       shares: '',
@@ -53,7 +54,7 @@ export default function NewTrade(props) {
   }
 
   function validateFields() {
-    const fieldErrors = validateTrade(fields);
+    const fieldErrors = validateTrade(fields, trades.tradeList);
     setFieldErrors(fieldErrors)
     return (Object.keys(fieldErrors).length > 0);
   }

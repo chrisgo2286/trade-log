@@ -28,6 +28,7 @@ export default function TradeUpdate(props) {
     setFieldErrors({});
     setFields({
       id: props.trade.id,
+      buy_sell: props.trade.buy_sell,
       stock: props.trade.stock,
       price: props.trade.price,
       shares: props.trade.shares,
@@ -54,7 +55,7 @@ export default function TradeUpdate(props) {
   }
 
   function validateFields() {
-    const fieldErrors = validateTrade(fields);
+    const fieldErrors = validateTrade(fields, trades.tradeList);
     setFieldErrors(fieldErrors)
     return (Object.keys(fieldErrors).length > 0);
   }
