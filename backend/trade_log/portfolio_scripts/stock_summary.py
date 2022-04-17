@@ -11,7 +11,7 @@ class StockSummary(PortfolioSummary):
 
     TICKERS = {
         'VCN.TO': 43.83,
-        'XUS.TO': 69.03,
+        'XUS.TO': 21.00,
         'ZAG.TO': 14.29,
         'MSFT': 282.06,
         'TD.TO': 94.59,
