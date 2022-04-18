@@ -18,12 +18,13 @@ class StockQueue:
             
             if stock.shares <= 0:
                 self.history.pop(0)
-                print('Removing stock from queue')
 
-            print(shares_sold)
+    def adjusted_cost_basis(self):
+        return(sum([trade.price * trade.shares + trade.commission 
+            for trade in self.history]))
 
-    def adj_cost_basis(self):
-        return(sum([stock.price * stock.shares + stock.commission for stock in self.history]))
+    def total_shares(self):
+        return(sum[trade.shares for trade in self.history])
 
 class StockPurchase:
     """Class to store data about single stock purchase"""

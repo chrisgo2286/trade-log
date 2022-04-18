@@ -30,11 +30,8 @@ def portfolio_view(request):
     for trade in trades:
         if trade.buy_sell == 'BUY':
             stock_history.add(trade)
-            print('Added stock')
         else:
             stock_history.sell(trade)
-            print('Sold stock')
-    print(stock_history.adj_cost_basis())
         
 
 
