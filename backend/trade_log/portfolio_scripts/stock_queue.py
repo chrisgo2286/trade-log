@@ -6,17 +6,17 @@ class StockQueue:
         self.history = []
 
     def add(self, purchase):
-        stock = StockPurchase(purchase)
-        self.history.append(stock)
+        trade = StockPurchase(purchase)
+        self.history.append(trade)
 
     def sell(self, sale):
         shares_sold = sale.shares
         
         while shares_sold > 0:
-            stock = self.history[0]
-            shares_sold = stock.sell(shares_sold)
+            trade = self.history[0]
+            shares_sold = trade.sell(shares_sold)
             
-            if stock.shares <= 0:
+            if trade.shares <= 0:
                 self.history.pop(0)
 
     def adjusted_cost_basis(self):
@@ -24,7 +24,7 @@ class StockQueue:
             for trade in self.history]))
 
     def total_shares(self):
-        return(sum[trade.shares for trade in self.history])
+        return(sum([trade.shares for trade in self.history]))
 
 class StockPurchase:
     """Class to store data about single stock purchase"""

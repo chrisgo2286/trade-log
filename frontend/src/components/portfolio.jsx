@@ -8,7 +8,7 @@ export default function Portfolio() {
   const [data, setData] = useState([])
 
   const fetchData = async () => {
-    const result = await axios.get('/api/portfolio/',);
+    const result = await axios.get('/api/portfolio/?start=04152022',); //ADD PARAMS HERE
     setData(result.data);
   }
 

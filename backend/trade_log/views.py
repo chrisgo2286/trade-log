@@ -3,8 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import viewsets
 from .serializers import TradeSerializer
 from .models import Trade
-from .portfolio_scripts.stock_summary import StockSummary
-from .portfolio_scripts.stock_queue import StockQueue
+from .portfolio_scripts.portfolio_analysis import PortfolioAnalysis
 
 # Create your views here.
 
@@ -21,26 +20,12 @@ class TradeView(viewsets.ModelViewSet):
 
 @api_view(('GET',))
 def portfolio_view(request):
-    
-    trades = Trade.objects.filter(owner=request.user, stock='VCN.TO')
-    trades.order_by('date')
-
-    stock_history = StockQueue()
-
-    for trade in trades:
-        if trade.buy_sell == 'BUY':
-            stock_history.add(trade)
-        else:
-            stock_history.sell(trade)
-        
-
-
-
+    portfolio = PortfolioAnalysis(request.user, request.query_params)
 
     data = {}
 
-    summary = StockSummary(owner=request.user)
+    # summary = StockSummary(owner=request.user)
 
-    data['stock_summary'] = summary.get_data()
+    # data['stock_summary'] = summary.get_data()
     
     return Response(data)

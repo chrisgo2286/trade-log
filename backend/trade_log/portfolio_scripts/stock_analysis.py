@@ -1,4 +1,4 @@
-from .stock_queue import StockQueue
+from trade_log.portfolio_scripts.stock_queue import StockQueue
 from static.market_data import STOCKS
 
 class StockAnalysis:
@@ -50,7 +50,7 @@ class StockAnalysis:
     #SHOULD ALSO INCLUDE PROFIT FROM SOLD STOCKS!
     def total_profit_loss(self):
         self.stats['total_profit_loss'] = ((self.stats['market_price'] -
-          self.stats['average_price']) * self.stats['shares']))
+          self.stats['average_price']) * self.stats['shares'])
 
     def profit_loss_per_share(self):
         self.stats['profit_loss_per_share'] = (self.stats['total_profit_loss']
