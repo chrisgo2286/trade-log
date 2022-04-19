@@ -4,12 +4,13 @@ from static.market_data import STOCKS
 class StockAnalysis:
     """Class to analyze history of stock and return stats"""
     """Trades param is already filtered for owner, stock and date"""
-    def __init__(self, trades):
+    def __init__(self, stock, trades):
         self.trades = trades
-        self.stock = trades[0].stock
+        self.stock = stock
         self.stock_history = StockQueue()
         self.init_stock_history()
         self.stats = {
+            'stock': self.stock,
             'market_price': '',
             'adjusted_cost_basis': '',
             'total_shares': '',
@@ -35,7 +36,7 @@ class StockAnalysis:
         self.profit_loss_per_share()
 
     def market_price(self):
-        self.stats['market_price'] = STOCKS[self.stock]
+        self.stats['market_price'] = float(STOCKS[self.stock])
 
     def adjusted_cost_basis(self):
         self.stats['adjusted_cost_basis'] = self.stock_history.adjusted_cost_basis()
@@ -44,14 +45,20 @@ class StockAnalysis:
         self.stats['total_shares'] = self.stock_history.total_shares()
         
     def average_price(self):
-        self.stats['average_price'] = (self.stats['adjusted_cost_basis'] / 
-            self.stats['total shares'])
+        try:
+            self.stats['average_price'] = float((self.stats['adjusted_cost_basis'] / 
+                self.stats['total_shares']))
+        except ZeroDivisionError:
+            self.stats['average_price'] = 0.00
 
     #SHOULD ALSO INCLUDE PROFIT FROM SOLD STOCKS!
     def total_profit_loss(self):
         self.stats['total_profit_loss'] = ((self.stats['market_price'] -
-          self.stats['average_price']) * self.stats['shares'])
+          self.stats['average_price']) * self.stats['total_shares'])
 
     def profit_loss_per_share(self):
-        self.stats['profit_loss_per_share'] = (self.stats['total_profit_loss']
-            / self.stats['total_shares'])
+        try:
+            self.stats['profit_loss_per_share'] = (self.stats['total_profit_loss']
+                / self.stats['total_shares'])
+        except ZeroDivisionError:
+            self.stats['profit_loss_per_share'] = 0.00

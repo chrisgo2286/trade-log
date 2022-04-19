@@ -21,11 +21,8 @@ class TradeView(viewsets.ModelViewSet):
 @api_view(('GET',))
 def portfolio_view(request):
     portfolio = PortfolioAnalysis(request.user, request.query_params)
-
-    data = {}
-
     # summary = StockSummary(owner=request.user)
 
     # data['stock_summary'] = summary.get_data()
     
-    return Response(data)
+    return Response(portfolio.compile_data())
