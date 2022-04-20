@@ -37,7 +37,7 @@
 .chart {
 }
 
-.chart-body {
+.chart-body, .overview {
   border: 1px solid var(--siteBorderColor);
   border-radius: 10px;
   height: 100%;

@@ -44,7 +44,7 @@ class PortfolioAnalysis:
         self.data['overview']['return'] = (self.data['overview']['value'] -
             self.data['overview']['acb'])
         self.data['overview']['roi'] = (self.data['overview']['return'] /
-            self.data['overview']['acb'])
+            self.data['overview']['acb']) * 100
 
     def compile_value_data(self):
         pass

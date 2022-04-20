@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import StockSummary from './stockSummary';
+import Overview from './overview';
 import Button from './button';
 import '../styles/portfolio.css';
 
@@ -20,7 +21,6 @@ export default function Portfolio() {
     console.log('Filter btn pressed')
   }
 
-  console.log(data)
   return(
     <div className="container">
       <div className='portfolio'>
@@ -41,7 +41,7 @@ export default function Portfolio() {
         </div>
         <div className='chart' id="overview">
           <div className="chart-header">OVERVIEW</div>
-          <div className="chart-body"></div>
+          <Overview data={ (data.overview) ? data.overview: {} } />
         </div>
         <div className="stock-summary">
           <StockSummary data={ (data.stock_summary) ? data.stock_summary: [] }/>
