@@ -1,5 +1,5 @@
 export default function Overview (props) {
-  function formatValue(value) {
+  function formatValue (value) {
     if (value) {
       value = value.toLocaleString(undefined, {minimumFractionDigits: 2});
       return value;
@@ -7,16 +7,28 @@ export default function Overview (props) {
     return 0;
   }
 
+  function handleClass () {
+    return (props.data.return > 0) ? 'overview-value profit': 'overview-value loss';
+  }
+
   return (
     <div className="overview">
-        <div>ADJUSTED COST BASIS</div>
-        <div>${ formatValue(props.data.acb) }</div>
-        <div>CURRENT MARKET VALUE</div> 
-        <div>${ formatValue(props.data.value) }</div>
-        <div>PROFIT/LOSS</div>
-        <div>${ formatValue(props.data.return) }</div>
-        <div>RETURN</div>
-        <div>{ formatValue(props.data.roi) }%</div>
+      <div className='overview-stat'> 
+        <div className='overview-category'>CURRENT MARKET VALUE</div> 
+        <div className='overview-value'>${ formatValue(props.data.value) }</div>
+      </div>
+      <div className='overview-stat'>    
+        <div className='overview-category'>ADJUSTED COST BASIS</div>
+        <div className='overview-value'>${ formatValue(props.data.acb) }</div>
+      </div>
+      <div className='overview-stat'>
+        <div className='overview-category'>PROFIT/LOSS</div>
+        <div className={ handleClass() }>${ formatValue(props.data.return) }</div>
+      </div>
+      <div className='overview-stat'>
+        <div className='overview-category'>RETURN</div>
+        <div className={ handleClass() }>{ formatValue(props.data.roi) }%</div>
+      </div>
     </div>
   )
 }

@@ -32,6 +32,7 @@
 
 .stock-summary {
   grid-area: data;
+  height: 92%;
 }
 
 .chart {
@@ -40,7 +41,44 @@
 .chart-body, .overview {
   border: 1px solid var(--siteBorderColor);
   border-radius: 10px;
+  height: 92%;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-stat {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center; */
   height: 100%;
+  width: 100%;
+  border: 1px solid var(--siteBorderColor)
+}
+
+.overview-category {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.overview-value {
+  color: var(--valueColor);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.profit {
+  color: var(--valueProfitColor);
+}
+
+.loss {
+  color: var(--valueLossColor);
 }
 
 .summary-items {
@@ -60,8 +98,6 @@
 
 .stock-summary-headers {
   font-weight: bold;
-  height: 15px;
-  line-height: 15px;
   background-color: var(--modalHeaderColor);
 }
 
