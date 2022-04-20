@@ -20,6 +20,7 @@ export default function Portfolio() {
     console.log('Filter btn pressed')
   }
 
+  console.log(data)
   return(
     <div className="container">
       <div className='portfolio'>

@@ -19,11 +19,11 @@ class StockQueue:
             if trade.shares <= 0:
                 self.history.pop(0)
 
-    def adjusted_cost_basis(self):
+    def calc_acb(self):
         return(sum([trade.price * trade.shares + trade.commission 
             for trade in self.history]))
 
-    def total_shares(self):
+    def calc_shares(self):
         return(sum([trade.shares for trade in self.history]))
 
 class StockPurchase:

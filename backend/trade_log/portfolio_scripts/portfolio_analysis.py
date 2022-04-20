@@ -7,35 +7,49 @@ class PortfolioAnalysis:
         self.owner = owner
         self.filter = params
         self.trades = PortfolioFilter(owner, params).trades
+        self.stocks = self.find_all_stocks()
+        self.data = {
+            'stock_summary': [],
+            'overview': {
+                'acb': 0,
+                'value': 0,
+                'roi': 0,
+                'return': 0,
+            },
+            'value': {},
+            'composition': {},    
+        }
+        self.compile_data()
 
-    def compile_data(self):
-        data = {}
-        data['stock_summary'] = self.compile_stock_summary()
-        data['portfolio_overview'] = self.compile_portfolio_overview()
-        data['portfolio_value'] = self.compile_portfolio_value()
-        data['portfolio_composition'] = self.compile_portfolio_composition()
-        return data
-
-    def compile_stock_summary(self):
-        stock_summary = []
-        for stock in self.find_all_stocks():
-            stock_trades = self.trades.filter(stock=stock)
-            stock_analysis = StockAnalysis(stock, stock_trades.order_by('date'))
-            stock_summary.append(stock_analysis.stats)
-        return stock_summary
 
     def find_all_stocks(self):
         stocks = self.trades.values_list('stock', flat=True).distinct()
         return stocks
+    
+    def compile_data(self):
+        self.compile_stock_data()
+        self.compile_overview_data()
+        self.compile_value_data()
+        self.compile_composition_data()
 
-    def compile_portfolio_overview(self):
-        portfolio_overview = {}
-        return portfolio_overview
+    def compile_stock_data(self):
+        for stock in self.stocks:
+            stock_trades = self.trades.filter(stock=stock)
+            analysis = StockAnalysis(stock, stock_trades.order_by('date'))
+            self.data['stock_summary'].append(analysis.stats)
+            self.data['overview']['acb'] += analysis.stats['acb']
+            self.data['overview']['value'] += analysis.stats['value']
 
-    def compile_portfolio_value(self):
-        portfolio_value = {}
-        return portfolio_value
+    def compile_overview_data(self):
+        self.data['overview']['return'] = (self.data['overview']['value'] -
+            self.data['overview']['acb'])
+        self.data['overview']['roi'] = (self.data['overview']['return'] /
+            self.data['overview']['acb'])
 
-    def compile_portfolio_composition(self):
-        portfolio_composition = {}
-        return portfolio_composition
+    def compile_value_data(self):
+        pass
+
+    def compile_composition_data(self):
+        pass
+
+    

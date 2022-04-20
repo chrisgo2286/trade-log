@@ -9,11 +9,11 @@ export default function StockSummary (props) {
         { props.data.map((stock, ndx) => (
           <div key={ ndx } className="summary-item">
             <div>{ stock.stock }</div>
-            <div>{ stock.market_price.toFixed(2) }</div>
-            <div>{ stock.average_price.toFixed(2) }</div>
-            <div>{ stock.total_shares }</div>
-            <div>{ stock.total_profit_loss.toFixed(2) }</div>
-            <div>{ stock.profit_loss_per_share.toFixed(2) }</div>
+            <div>{ stock.market.toFixed(2) }</div>
+            <div>{ stock.average.toFixed(2) }</div>
+            <div>{ stock.shares }</div>
+            <div>{ stock.pl.toFixed(2) }</div>
+            <div>{ stock.pl_per_share.toFixed(2) }</div>
           </div>   
         ))}
       </div>

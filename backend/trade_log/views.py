@@ -25,4 +25,4 @@ def portfolio_view(request):
 
     # data['stock_summary'] = summary.get_data()
     
-    return Response(portfolio.compile_data())
+    return Response(portfolio.data)
