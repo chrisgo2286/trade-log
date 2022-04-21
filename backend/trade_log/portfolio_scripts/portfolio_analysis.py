@@ -16,7 +16,6 @@ class PortfolioAnalysis:
                 'roi': 0,
                 'return': 0,
             },
-            'value': {},
             'composition': {},    
         }
         self.compile_data()
@@ -29,7 +28,6 @@ class PortfolioAnalysis:
     def compile_data(self):
         self.compile_stock_data()
         self.compile_overview_data()
-        self.compile_value_data()
         self.compile_composition_data()
 
     def compile_stock_data(self):
@@ -45,9 +43,6 @@ class PortfolioAnalysis:
             self.data['overview']['acb'])
         self.data['overview']['roi'] = (self.data['overview']['return'] /
             self.data['overview']['acb']) * 100
-
-    def compile_value_data(self):
-        pass
 
     def compile_composition_data(self):
         pass

@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from .serializers import TradeSerializer
 from .models import Trade
 from .portfolio_scripts.portfolio_analysis import PortfolioAnalysis
+from .portfolio_scripts.value_data import ValueData
 
 # Create your views here.
 
@@ -21,8 +22,9 @@ class TradeView(viewsets.ModelViewSet):
 @api_view(('GET',))
 def portfolio_view(request):
     portfolio = PortfolioAnalysis(request.user, request.query_params)
-    # summary = StockSummary(owner=request.user)
-
-    # data['stock_summary'] = summary.get_data()
+    value_data = ValueData(request.user, request.query_params)
+    data = portfolio.data
+    data['value'] = value_data.data
+    print(data)
     
-    return Response(portfolio.data)
+    return Response(data)

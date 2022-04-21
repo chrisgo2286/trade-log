@@ -1,0 +1,51 @@
+from .portfolio_analysis import PortfolioAnalysis
+from trade_log.models import Trade
+from datetime import timedelta
+import math
+
+# ERROR IF DATES IS LESS THAN 10 DAYS; SHOULD USE INTERVAL OF 1 DAY
+
+class ValueData:
+    def __init__(self, owner, params):
+        self.owner = owner
+        self.filter = params
+        self.trades = Trade.objects.filter(owner=self.owner)
+        self.dates = []
+        self.data = []
+        self.compile_data()
+
+    def compile_data(self):
+        self.compile_dates()
+        for date in self.dates:
+            params = {'end': date.strftime('%m%d%Y')}
+            analysis = PortfolioAnalysis(self.owner, params)
+            self.data.append({ 
+                'date': date.strftime('%-m/%-d'),
+                'value': analysis.data['overview']['value']
+            })
+
+    def compile_dates(self):
+        start, end = self.find_start_date(), self.find_end_date()
+        interval = self.find_interval(start, end)
+
+        while start < end:
+            self.dates.append(start)
+            start = start + timedelta(days=interval)
+        self.dates.append(end)
+    
+    def find_interval(self, start, end):
+        total_days = (end - start).days
+        return total_days // 5
+
+    def find_start_date(self):
+        if self.filter.get('start'):
+            return self.filter.get('start')
+        return self.trades.order_by('date')[0].date
+
+    def find_end_date(self):
+        if self.filter.get('end'):
+            return self.filter.get('end')
+        return self.trades.order_by('-date')[0].date
+
+
+
