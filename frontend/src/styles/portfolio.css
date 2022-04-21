@@ -50,10 +50,6 @@
 }
 
 .overview-stat {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center; */
   height: 100%;
   width: 100%;
   border: 1px solid var(--siteBorderColor)
