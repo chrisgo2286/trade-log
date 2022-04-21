@@ -9,7 +9,9 @@ export default function Trade(props) {
   const [tradeClicked, setTradeClicked] = useState(false);
 
   function handleTradeClass () {
-    return (tradeHovered === true) ? 'trade hover': 'trade';
+    const hover = (tradeHovered === true) ? 'trade-hover': '';
+    const buy_sell = (props.trade.buy_sell === 'BUY') ? 'buy ': 'sell ';
+    return 'trade ' + buy_sell + hover;
   }
 
   function toggleTradeHovered () {

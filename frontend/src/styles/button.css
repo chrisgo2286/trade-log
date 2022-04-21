@@ -9,3 +9,15 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+.hover {
+  background-color: var(--hoverColor);
+}
+
+.click {
+  background-color: var(--hoverColor);
+}
+
+.radio-btns {
+  text-align: center;
+}

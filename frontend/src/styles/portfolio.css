@@ -2,11 +2,16 @@
   margin: 50px auto;
   max-width: 1000px;
   display: grid;
-  grid-template-areas: 
-    'data data chart1'
-    'chart2 chart3 chart4';
-  grid-template-rows: 400px 400px;
+  grid-template-areas:
+    'btns btns btns' 
+    'chart1 overview chart2'
+    'data data chart3';
+  grid-template-rows: 50px 400px 400px;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ledger-btns {
+  grid-area: btns;
 }
 
 #chart1 {
@@ -21,27 +26,61 @@
   grid-area: chart3;
 }
 
-#chart4 {
-  grid-area: chart4;
+#overview {
+  grid-area: overview;
 }
 
 .stock-summary {
   grid-area: data;
+  height: 92%;
 }
 
 .chart {
 }
 
-.chart-body {
+.chart-body, .overview {
   border: 1px solid var(--siteBorderColor);
   border-radius: 10px;
+  height: 92%;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-stat {
   height: 100%;
+  width: 100%;
+  border: 1px solid var(--siteBorderColor)
+}
+
+.overview-category {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.overview-value {
+  color: var(--valueColor);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.profit {
+  color: var(--valueProfitColor);
+}
+
+.loss {
+  color: var(--valueLossColor);
 }
 
 .summary-items {
   display: flex;
   flex-direction: column;
-  height: 92%;
+  height: 100%;
   overflow-y: scroll;
 }
 
@@ -55,8 +94,6 @@
 
 .stock-summary-headers {
   font-weight: bold;
-  height: 15px;
-  line-height: 15px;
   background-color: var(--modalHeaderColor);
 }
 

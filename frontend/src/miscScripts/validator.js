@@ -1,10 +1,19 @@
 import validator from 'validator';
+import { totalSharesDateFilter } from './calc';
 
-export function validateTrade(fields) {
+export function validateTrade(fields, trades) {
   var fieldErrors = {};
 
   if(fields.stock === '') {
     fieldErrors.stock = 'Please enter a valid stock ticker!';
+  }
+
+  if(!fields.id && fields.buy_sell === 'SELL' && totalSharesDateFilter(trades, fields.stock, fields.date) - fields.shares < 0) {
+    fieldErrors.buy_sell = 'You do not have enough stocks to sell on this date!'
+  }
+
+  if(fields.id && fields.buy_sell === 'SELL' && totalSharesDateFilter(trades, fields.stock, fields.date) - (fields.shares * 2) < 0) {
+    fieldErrors.buy_sell = 'You do not have enough stocks to sell on this date!'
   }
 
   if(!validator.isDecimal(fields.price.toString()) | fields.price === '') {

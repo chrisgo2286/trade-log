@@ -3,6 +3,7 @@ import axios from 'axios';
 import TradeInput from './tradeInput';
 import { TradeContext } from '../index.js';
 import Button from './button';
+import RadioButtons from './radioButtons';
 import Modal from './modal';
 import ValidationErrors from './validationErrors';
 import { validateTrade } from '../miscScripts/validator';
@@ -11,6 +12,7 @@ export default function TradeUpdate(props) {
   const trades = useContext(TradeContext);
   const [fields, setFields] = useState({
     id: props.trade.id,
+    buy_sell: props.trade.buy_sell,
     stock: props.trade.stock,
     price: props.trade.price,
     shares: props.trade.shares,
@@ -26,6 +28,7 @@ export default function TradeUpdate(props) {
     setFieldErrors({});
     setFields({
       id: props.trade.id,
+      buy_sell: props.trade.buy_sell,
       stock: props.trade.stock,
       price: props.trade.price,
       shares: props.trade.shares,
@@ -52,7 +55,7 @@ export default function TradeUpdate(props) {
   }
 
   function validateFields() {
-    const fieldErrors = validateTrade(fields);
+    const fieldErrors = validateTrade(fields, trades.tradeList);
     setFieldErrors(fieldErrors)
     return (Object.keys(fieldErrors).length > 0);
   }
@@ -71,7 +74,8 @@ export default function TradeUpdate(props) {
       <div className='modal-header'>
         <div>UPDATE TRADE</div>
       </div>
-      <form onSubmit={ handleSubmit }>
+      <form>
+        <RadioButtons buy_sell={ fields.buy_sell } onChange={ handleChange }/>
         <TradeInput 
           name='stock'
           type='text'

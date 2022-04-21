@@ -33,10 +33,18 @@
   background-color: var(--tradeListHeaderColor);
 }
 
-.hover {
-  background-color: var(--hoverColor);
-}
-
 .material-icons {
   vertical-align: middle;
+}
+
+.trade-hover {
+  opacity: .75;
+}
+
+.buy {
+  background-color: var(--buyColor);
+}
+
+.sell {
+  background-color: var(--sellColor);
 }
