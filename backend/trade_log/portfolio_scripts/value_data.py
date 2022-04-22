@@ -1,9 +1,8 @@
+from unicodedata import decimal
 from .portfolio_analysis import PortfolioAnalysis
 from trade_log.models import Trade
 from datetime import timedelta
 import math
-
-# ERROR IF DATES IS LESS THAN 10 DAYS; SHOULD USE INTERVAL OF 1 DAY
 
 class ValueData:
     def __init__(self, owner, params):
@@ -19,9 +18,10 @@ class ValueData:
         for date in self.dates:
             params = {'end': date.strftime('%m%d%Y')}
             analysis = PortfolioAnalysis(self.owner, params)
+            value = analysis.data['overview']['value']
             self.data.append({ 
                 'date': date.strftime('%-m/%-d'),
-                'value': analysis.data['overview']['value']
+                'value': value
             })
 
     def compile_dates(self):

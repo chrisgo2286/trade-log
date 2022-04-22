@@ -1,11 +1,14 @@
 from trade_log.portfolio_scripts.stock_queue import StockQueue
 from static.market_data import STOCKS
-
+import pandas as pd
+from datetime import timedelta
+import json
 class StockAnalysis:
     """Class to analyze history of stock and return stats"""
     """Trades param is already filtered for owner, stock and date"""
-    def __init__(self, stock, trades):
+    def __init__(self, stock, trades, end_date):
         self.trades = trades
+        self.end_date = self.check_end_date(end_date)
         self.stock = stock
         self.history = StockQueue()
         self.init_history()
@@ -20,6 +23,15 @@ class StockAnalysis:
             'acb': float(self.history.calc_acb()),
         }
         self.init_stock_stats()
+
+    def check_end_date(self, end_date):
+        """
+        If not business day subtract one day.
+        Still need to account for holidays.
+        """
+        while end_date.weekday() > 4:
+           end_date = end_date - timedelta(days=1)
+        return end_date
 
     def init_history(self):
         for trade in self.trades:
@@ -37,8 +49,16 @@ class StockAnalysis:
         self.market_value()
 
     def market_price(self):
-        self.stats['market'] = float(STOCKS[self.stock])
-
+        with open('static/yf_pull.json') as data_file:
+            data = json.load(data_file)
+        key1 = f"('{self.stock}', 'Close')"
+        key2 = f"{self.end_date.strftime('%Y-%m-%d')}T00:00:00.000Z"
+        try:
+            self.stats['market'] = data[key1][key2]
+        except KeyError:
+            self.end_date = self.end_date - timedelta(days=1)
+            key2 = f"{self.end_date.strftime('%Y-%m-%d')}T00:00:00.000Z"
+            self.stats['market'] = data[key1][key2]
     def total_shares(self):
         self.stats['shares'] = self.history.calc_shares()
         

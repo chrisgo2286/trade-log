@@ -22,21 +22,6 @@ export default function Portfolio() {
     console.log('Filter btn pressed')
   }
 
-  const valueData = [
-    { date: 'Jan', value: 100.00 },
-    { date: 'Feb', value: 150.00 },
-    { date: 'Mar', value: 225.00 },
-    { date: 'Apr', value: 200.00 },
-    { date: 'May', value: 215.00 },
-    { date: 'Jun', value: 245.00 },
-    { date: 'Jul', value: 235.00 },
-    { date: 'Aug', value: 255.00 },
-    { date: 'Sep', value: 265.00 },
-    { date: 'Oct', value: 280.00 },
-    { date: 'Nov', value: 275.00 },
-    { date: 'Dec', value: 270.00 },
-  ];
-
   return(
     <div className="container">
       <div className='portfolio'>
@@ -46,7 +31,7 @@ export default function Portfolio() {
         <div className='chart' id="chart1">
           <div className="chart-header">PORTFOLIO VALUE</div>
           <div className="chart-body">
-            <ValueChart data ={ valueData } />
+            <ValueChart data ={ (data.value) ? data.value: [] } />
           </div>
         </div>
         <div className='chart' id="chart2">
