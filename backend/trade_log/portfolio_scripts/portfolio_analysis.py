@@ -7,8 +7,9 @@ class PortfolioAnalysis:
     def __init__(self, owner, params):
         self.owner = owner
         self.filter = params
-        self.end_date = self.find_end_date() # datetime.date object
         self.trades = PortfolioFilter(owner, params).trades
+        self.start_date = self.find_start_date()
+        self.end_date = self.find_end_date()
         self.stocks = self.find_all_stocks()
         self.data = {
             'stock_summary': [],
@@ -21,14 +22,18 @@ class PortfolioAnalysis:
             'composition': {},    
         }
         self.compile_data()
+    
+    def find_start_date(self):
+        if self.filter.get('start'):
+            start = self.filter.get('start')
+            return datetime.strptime(start, '%m%d%Y').date()
+        return self.trades.order_by('date')[0].date
 
     def find_end_date(self):
         if self.filter.get('end'):
-            date_obj = datetime.strptime(self.filter.get('end'), '%m%d%Y')
-            if date_obj == datetime.today():  
-                return date_obj - timedelta(days=1)
-            return date_obj
-        return datetime.today() - timedelta(days=1)
+            end = self.filter.get('end')
+            return datetime.strptime(end, '%m%d%Y').date()
+        return datetime.today().date()
 
     def find_all_stocks(self):
         stocks = self.trades.values_list('stock', flat=True).distinct()
@@ -50,9 +55,16 @@ class PortfolioAnalysis:
     def compile_overview_data(self):
         self.data['overview']['return'] = (self.data['overview']['value'] -
             self.data['overview']['acb'])
-        self.data['overview']['roi'] = (self.data['overview']['return'] /
-            self.data['overview']['acb']) * 100
 
+        factor = (self.end_date - self.start_date).days / 365
+        
+        try:
+            self.data['overview']['roi'] = (self.data['overview']['return'] /
+                self.data['overview']['acb']) * 100 / factor
+
+        except ZeroDivisionError:
+            self.data['overview']['roi'] = 0
+            
     def compile_composition_data(self):
         pass
 

@@ -26,7 +26,7 @@ export default function Overview (props) {
         <div className={ handleClass() }>${ formatValue(props.data.return) }</div>
       </div>
       <div className='overview-stat'>
-        <div className='overview-category'>RETURN</div>
+        <div className='overview-category'>ANNUAL RETURN</div>
         <div className={ handleClass() }>{ formatValue(props.data.roi) }%</div>
       </div>
     </div>

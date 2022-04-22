@@ -1,7 +1,7 @@
 from unicodedata import decimal
 from .portfolio_analysis import PortfolioAnalysis
 from trade_log.models import Trade
-from datetime import timedelta
+from datetime import timedelta, datetime
 import math
 
 class ValueData:
@@ -39,13 +39,15 @@ class ValueData:
 
     def find_start_date(self):
         if self.filter.get('start'):
-            return self.filter.get('start')
+            start = self.filter.get('start')
+            return datetime.strptime(start, '%m%d%Y').date()
         return self.trades.order_by('date')[0].date
 
     def find_end_date(self):
         if self.filter.get('end'):
-            return self.filter.get('end')
-        return self.trades.order_by('-date')[0].date
+            end = self.filter.get('end')
+            return datetime.strptime(end, '%m%d%Y').date()
+        return datetime.today().date()
 
 
 
