@@ -4,13 +4,15 @@ from rest_framework import viewsets
 from .serializers import TradeSerializer
 from .models import Trade
 from .portfolio_scripts.portfolio_analysis import PortfolioAnalysis
+from .portfolio_scripts.value_data import ValueData
+from .portfolio_scripts.market_data import MarketData
 
 # Create your views here.
 
 class TradeView(viewsets.ModelViewSet):
 
     serializer_class = TradeSerializer
-    queryset = Trade.objects.all()
+    queryset = Trade.objects.all().order_by('date')
 
     def perform_create(self, serializer):
         return serializer.save(owner=self.request.user)
@@ -20,9 +22,14 @@ class TradeView(viewsets.ModelViewSet):
 
 @api_view(('GET',))
 def portfolio_view(request):
-    portfolio = PortfolioAnalysis(request.user, request.query_params)
-    # summary = StockSummary(owner=request.user)
+    # market_data = MarketData()
+    # market_data.pull()
 
-    # data['stock_summary'] = summary.get_data()
+    portfolio = PortfolioAnalysis(request.user, request.query_params)
+    value_data = ValueData(request.user, request.query_params)
+    data = portfolio.data
+    data['value'] = value_data.data
     
-    return Response(portfolio.data)
+
+    
+    return Response(data)

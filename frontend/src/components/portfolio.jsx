@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import StockSummary from './stockSummary';
 import Overview from './overview';
+import ValueChart from './valueChart';
 import Button from './button';
 import '../styles/portfolio.css';
 
@@ -28,8 +29,10 @@ export default function Portfolio() {
           <Button onClick={ handleFilter }>FILTER</Button>
         </div>
         <div className='chart' id="chart1">
-          <div className="chart-header">CHART 1</div>
-          <div className="chart-body"></div>
+          <div className="chart-header">PORTFOLIO VALUE</div>
+          <div className="chart-body">
+            <ValueChart data ={ (data.value) ? data.value: [] } />
+          </div>
         </div>
         <div className='chart' id="chart2">
           <div className="chart-header">CHART 2</div>
