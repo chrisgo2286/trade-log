@@ -12,7 +12,7 @@ from .portfolio_scripts.market_data import MarketData
 class TradeView(viewsets.ModelViewSet):
 
     serializer_class = TradeSerializer
-    queryset = Trade.objects.all().order_by('date')
+    queryset = Trade.objects.all()
 
     def perform_create(self, serializer):
         return serializer.save(owner=self.request.user)
@@ -26,10 +26,6 @@ def portfolio_view(request):
     # market_data.pull()
 
     portfolio = PortfolioAnalysis(request.user, request.query_params)
-    value_data = ValueData(request.user, request.query_params)
     data = portfolio.data
-    data['value'] = value_data.data
-    
 
-    
     return Response(data)

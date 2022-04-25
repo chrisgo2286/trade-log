@@ -20,9 +20,8 @@ class Trade(models.Model):
     date = models.DateField()
     comment = models.TextField(blank=True, null=True)
 
-    @property
-    def total(self):
-        return(self.price * self.shares + self.commission)
+    class Meta:
+        ordering = ('date',)
         
     def __str__(self):
         return (f'{self.stock} @ {self.price} on {self.date}')
