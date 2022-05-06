@@ -13,8 +13,8 @@ def new_user():
     )
 
 @pytest.fixture
-def new_trade(new_user):
-    """Returns an instance of Trade"""
+def trade1(new_user):
+    """Returns a new instance of Trade"""
     return Trade.objects.create(
         owner = new_user,
         buy_sell = 'BUY',
@@ -26,9 +26,49 @@ def new_trade(new_user):
     )
 
 @pytest.fixture
-def stock_purchase(new_trade):
+def trade2(new_user):
+    """Returns a new instance of Trade"""
+    return Trade.objects.create(
+        owner = new_user,
+        buy_sell = 'BUY',
+        stock = 'VCN.TO',
+        price = 26.00,
+        commission = 15.00,
+        shares = 20,
+        date = date(2022, 2, 1),
+    )
+
+@pytest.fixture
+def trade3(new_user):
+    """Returns a new instance of Trade"""
+    return Trade.objects.create(
+        owner = new_user,
+        buy_sell = 'SELL',
+        stock = 'VCN.TO',
+        price = 27.00,
+        commission = 25.00,
+        shares = 20,
+        date = date(2022, 2, 15),
+    )
+
+@pytest.fixture
+def trade4(new_user):
+    """Returns a new instance of Trade"""
+    return Trade.objects.create(
+        owner = new_user,
+        buy_sell = 'SELL',
+        stock = 'VCN.TO',
+        price = 25.00,
+        commission = 25.00,
+        shares = 30,
+        date = date(2022, 2, 15),
+    )
+
+
+@pytest.fixture
+def stock_purchase(trade1):
     """Returns an instance of StockPurchase"""
-    return StockPurchase(new_trade)
+    return StockPurchase(trade1)
 
 @pytest.fixture
 def queue(stock_purchase):
