@@ -31,7 +31,7 @@ export default function Portfolio() {
         <div className='chart' id="chart1">
           <div className="chart-header">PORTFOLIO VALUE</div>
           <div className="chart-body">
-            <ValueChart data ={ (data.value) ? data.value: [] } />
+            <ValueChart data ={ (data.values) ? data.values: [] } />
           </div>
         </div>
         <div className='chart' id="chart2">
@@ -44,10 +44,10 @@ export default function Portfolio() {
         </div>
         <div className='chart' id="overview">
           <div className="chart-header">OVERVIEW</div>
-          <Overview data={ (data.overview) ? data.overview: {} } />
+          <Overview data={ (data) ? data: {} } />
         </div>
         <div className="stock-summary">
-          <StockSummary data={ (data.stock_summary) ? data.stock_summary: [] }/>
+          <StockSummary data={ (data.stocks) ? data.stocks: [] }/>
         </div>
       </div>
     </div>

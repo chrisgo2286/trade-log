@@ -1,6 +1,5 @@
 class StockQueue:
     """Class to implement FIFO on stocks purchased to find adjusted cost basis"""
-    """Data param is initial stock purchase data"""
     """Trades should be filtered by date prior to adding to queue"""
     def __init__(self):
         self.history = []

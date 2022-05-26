@@ -1,71 +1,143 @@
-from trade_log.portfolio_scripts.stock_analysis import StockAnalysis
-from trade_log.portfolio_scripts.portfolio_filter import PortfolioFilter
+from .stock_analysis import StockAnalysis
+from .portfolio_filter import PortfolioFilter
+from .misc import divide
 from trade_log.models import Trade
 from datetime import datetime, timedelta
 
 class PortfolioAnalysis:
     def __init__(self, owner, params):
         self.owner = owner
-        self.filter = params
-        self.trades = PortfolioFilter(owner, params).trades
-        self.start_date = self.find_start_date()
-        self.end_date = self.find_end_date()
-        self.stocks = self.find_all_stocks()
+        self.params = params
+        self.filters = self.init_filter()
+        self.trades = self.filter_trades(self.filters)
+        self.stocks = self.find_all_stocks(self.trades)
         self.data = {
-            'stock_summary': [],
-            'overview': {
-                'acb': 0,
-                'value': 0,
-                'roi': 0,
-                'return': 0,
-            },
-            'composition': {},    
+            'stocks': [],
+            'values': [],
+            'composition': [],
+            'acb': 0,
+            'value': 0,
+            'roi': 0,
+            'return': 0,
         }
+        self.dates = self.compile_dates()
         self.compile_data()
-    
-    def find_start_date(self):
-        if self.filter.get('start'):
-            start = self.filter.get('start')
-            return datetime.strptime(start, '%m%d%Y').date()
-        return self.trades.order_by('date')[0].date
-
-    def find_end_date(self):
-        if self.filter.get('end'):
-            end = self.filter.get('end')
-            return datetime.strptime(end, '%m%d%Y').date()
-        return datetime.today().date()
-
-    def find_all_stocks(self):
-        stocks = self.trades.values_list('stock', flat=True).distinct()
-        return stocks
     
     def compile_data(self):
         self.compile_stock_data()
         self.compile_overview_data()
-        self.compile_composition_data()
+        self.compile_values_data()
 
+    # Stock Summary
     def compile_stock_data(self):
         for stock in self.stocks:
-            stock_trades = self.trades.filter(stock=stock).order_by('date')
-            analysis = StockAnalysis(stock, stock_trades, self.end_date)
-            self.data['stock_summary'].append(analysis.stats)
-            self.data['overview']['acb'] += analysis.stats['acb']
-            self.data['overview']['value'] += analysis.stats['value']
+            trades = self.trades.filter(stock=stock)
+            analysis = StockAnalysis(trades, self.filters['end'])
+            analysis.compile_data()
+            self.data['stocks'].append(analysis.data)
 
+    # Overview
     def compile_overview_data(self):
-        self.data['overview']['return'] = (self.data['overview']['value'] -
-            self.data['overview']['acb'])
+        for stock in self.data['stocks']:
+            self.data['acb'] += stock['acb']
+            self.data['value'] += stock['value']
+        self.data['return'] = self.data['value'] - self.data['acb']
+        self.data['roi'] = self.calc_roi()
 
-        factor = (self.end_date - self.start_date).days / 365
+    def calc_roi(self):
+        roi = divide(self.data['return'], self.data['acb']) * 100
+        start = self.find_start_date() or self.trades[0].date
+        factor = (self.filters['end'] - start).days / 365
+        return divide(roi, factor)
+
+    # Value Chart
+    def compile_values_data(self):
+        """
+        Populates data attr with list of date/value dict pairs
+        """
+        for ndx, date in enumerate(self.dates):
+            date_str = date.strftime('%-m/%-d')
+            self.data['values'].append({'date': date_str, 'value': 0})
+            filters = self.build_new_filter({'end': date})
+            trades = self.filter_trades(filters)
+            stocks = self.find_all_stocks(trades)
+            for stock in stocks:
+                filters = self.build_new_filter({'end': date, 'stocks': (stock,)})
+                trades = self.filter_trades(filters)
+                analysis = StockAnalysis(trades, date)
+                value = analysis.compile_value_only()
+                self.data['values'][ndx]['value'] += value
+
+    # Helper Functions
+    def init_filter(self):
+        """
+        Parses through string parameters and converts to correct type
+        """
+        filters = {}
+        filters['owner'] = self.owner
+        filters['end'] = self.find_end_date()
         
-        try:
-            self.data['overview']['roi'] = (self.data['overview']['return'] /
-                self.data['overview']['acb']) * 100 / factor
+        if self.params.get('start'):
+            filters['start'] = self.find_start_date()
 
-        except ZeroDivisionError:
-            self.data['overview']['roi'] = 0
-            
-    def compile_composition_data(self):
-        pass
+        return filters
 
-    
+    def build_new_filter(self, filters):
+        """
+        Makes a shallow copy of current filter and revises certain keys/values
+        """
+        new_filters = self.filters.copy()
+        for key, value in filters.items():
+            new_filters[key] = value
+        return new_filters
+
+    def find_start_date(self):
+        """
+        Returns start param as date object if given
+        """
+        if self.params.get('start'):
+            start = self.params.get('start')
+            return datetime.strptime(start, '%m%d%Y').date()
+
+    def find_end_date(self):
+        """
+        Returns end param as date object if given, else today's date
+        """
+        if self.params.get('end'):
+            end = self.params.get('end')
+            return datetime.strptime(end, '%m%d%Y').date()
+        return datetime.today().date()
+
+    def filter_trades(self, filters):
+        """
+        Creates instance of PortfolioFilter to filter trades based on filters
+        """
+        portfolio_filter = PortfolioFilter(filters)
+        return portfolio_filter.filter_trades()
+
+    def find_all_stocks(self, trades):
+        """Returns list of stock names in given trades"""
+        # stocks = trades.values_list('stock', flat=True).distinct()
+        stocks = trades.values_list('stock', flat=True).distinct()
+        return set(stocks)
+
+    def compile_dates(self):
+        """
+        Creates a list of 5 or 6 date objs between start and end dates
+        """
+        dates = []
+        curr_date = self.find_start_date() or self.trades[0].date
+        interval = self.find_interval(curr_date, self.filters['end'])
+        while curr_date < self.filters['end']:
+            dates.append(curr_date)
+            curr_date = curr_date + timedelta(days=interval)
+        dates.append(self.filters['end'])
+        return dates
+
+    def find_interval(self, start, end):
+        """
+        Takes two date objs as arguements and return the difference divided by
+        five
+        """
+        total_days = (end - start).days
+        return total_days // 5
