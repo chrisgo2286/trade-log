@@ -1,8 +1,9 @@
 import pytest
 from datetime import date
-from trade_log.portfolio_scripts.stock_queue import StockPurchase, StockQueue
-from trade_log.models import Trade
 from django.contrib.auth.models import User
+from trade_log.portfolio_scripts.stock_queue import StockPurchase, StockQueue
+from trade_log.portfolio_scripts.stock_analysis import StockAnalysis
+from trade_log.models import Trade
 
 @pytest.fixture
 def new_user():
@@ -64,6 +65,7 @@ def trade4(new_user):
         date = date(2022, 2, 15),
     )
 
+#test_stock_queue.py
 
 @pytest.fixture
 def stock_purchase(trade1):
@@ -76,3 +78,12 @@ def queue(stock_purchase):
     queue = StockQueue()
     queue.add(stock_purchase)
     return queue
+
+#test_stock_analysis.py
+@pytest.fixture
+def analysis(trade1, trade2, trade3):
+    """Returns an instance of StockAnalysis with four trades entered"""
+    trades = (trade1, trade2, trade3)
+    end_date = date(2022, 4, 1)
+    return StockAnalysis(trades, end_date)
+

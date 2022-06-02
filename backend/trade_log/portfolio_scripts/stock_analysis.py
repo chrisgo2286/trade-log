@@ -4,6 +4,7 @@ from static.market_data import STOCKS
 import pandas as pd
 from datetime import timedelta
 import json
+
 class StockAnalysis:
     """Class to analyze history of stock and return data"""
     """Trades param is already filtered for owner, stock and date"""
@@ -78,13 +79,13 @@ class StockAnalysis:
         """
         return f"{date_obj.strftime('%Y-%m-%d')}T00:00:00.000Z"
         
-    def find_correct_key(self, data, key, curr_day):
+    def find_correct_key(self, data, json_date, date_obj):
         """
         If current end date not valid stock market day, tries prior day until
         a valid date is found.
         """
-        while key not in data:
-            curr_day = curr_day - timedelta(days=1)
-            key = self.convert_to_json_date(curr_day)
-        return key
+        while json_date not in data:
+            date_obj = date_obj - timedelta(days=1)
+            json_date = self.convert_to_json_date(date_obj)
+        return json_date
 

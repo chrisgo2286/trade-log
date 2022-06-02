@@ -1,7 +1,7 @@
 import pytest
 from datetime import date
-from fixtures import (trade1, trade2, trade3, trade4, new_user, stock_purchase,
-    queue)
+from trade_log.tests.fixtures import (trade1, trade2, trade3, trade4, new_user, 
+    stock_purchase, queue)
 
 
 pytestmark = pytest.mark.django_db
