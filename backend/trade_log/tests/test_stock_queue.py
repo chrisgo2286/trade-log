@@ -7,7 +7,7 @@ from trade_log.tests.fixtures import (trade1, trade2, trade3, trade4, new_user,
 pytestmark = pytest.mark.django_db
 
 STOCK1 = 'VCN.TO'
-PRICE1 = 25.00
+PRICE1 = 42.00
 SHARES1 = 30
 COMMISSION1 = 20.00
 DATE1 = date(2022, 1, 15)
@@ -21,7 +21,8 @@ SHARES_SOLD_B = 40
 REMAINING_SHARES_B = -10
 SHARE_ADJ_B = 10
 
-REMAINING_COST = 270.00
+REMAINING_COST = 440.00
+ACB = 1280.0
 
 # STOCK PURCHASE TESTS
 
@@ -68,7 +69,7 @@ def test_queue_sell(queue, trade3):
 
 def test_calc_acb(queue):
     """Tests that calc_acb method returns $770 for adjusted cost basis"""
-    assert queue.calc_acb() == 770.00
+    assert queue.calc_acb() == ACB
 
 def test_calc_shares(queue, trade2, trade3, trade4):
     """Tests that after four trades, remaining shares is zero"""

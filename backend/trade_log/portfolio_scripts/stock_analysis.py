@@ -8,6 +8,8 @@ import json
 class StockAnalysis:
     """Class to analyze history of stock and return data"""
     """Trades param is already filtered for owner, stock and date"""
+    MARKET_DATA = 'static/yf_pull.json'
+    
     def __init__(self, trades, end_date):
         self.trades = trades
         self.stock = self.trades[0].stock
@@ -34,7 +36,7 @@ class StockAnalysis:
         self.data['value'] = self.market_value()
 
     def market_price(self):
-        with open('static/yf_pull.json') as data_file:
+        with open(self.MARKET_DATA) as data_file:
             data = json.load(data_file)
             key1 = f"('{self.stock}', 'Close')"
             key2 = self.convert_to_json_date(self.end_date)
