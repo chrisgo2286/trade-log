@@ -62,12 +62,11 @@ class StockAnalysis:
         return divide(self.data['pl'], self.data['shares'])
 
     def market_value(self):
+        """Sets market attribute to total market value of shares"""
         return self.data['market'] * self.data['shares']
 
     def compile_value_only(self):
-        """
-        Returns portfolio value only. For ValueChart
-        """
+        """Returns portfolio value only. For ValueChart"""
         market = self.market_price()
         shares = self.total_shares()
         return market * shares

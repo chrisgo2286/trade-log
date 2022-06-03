@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib.auth.models import User
 from trade_log.portfolio_scripts.stock_queue import StockPurchase, StockQueue
 from trade_log.portfolio_scripts.stock_analysis import StockAnalysis
+from trade_log.portfolio_scripts.portfolio_analysis import PortfolioAnalysis
 from trade_log.models import Trade
 
 @pytest.fixture
@@ -62,9 +63,21 @@ def trade4(new_user):
         price = 42.00,
         commission = 25.00,
         shares = 30,
-        date = date(2022, 2, 15),
+        date = date(2022, 3, 1),
     )
 
+@pytest.fixture
+def trade5(new_user):
+    """Returns a new instance of Trade with new stock"""
+    return Trade.objects.create(
+        owner = new_user,
+        buy_sell = 'BUY',
+        stock = 'XUS.TO',
+        price = 70.50,
+        commission = 30.00,
+        shares = 15,
+        date = date(2022, 2, 15),
+    )
 #test_stock_queue.py
 
 @pytest.fixture
@@ -87,3 +100,15 @@ def analysis(trade1, trade2, trade3):
     end_date = date(2022, 4, 1)
     return StockAnalysis(trades, end_date)
 
+#test_portfolio_analysis.py
+@pytest.fixture
+def portfolio(new_user, trade1, trade2, trade3, trade4, trade5):
+    """Returns an instance of PortfolioAnalysis with no params"""
+    return PortfolioAnalysis(new_user)
+
+@pytest.fixture
+def params(new_user, trade1, trade2, trade3, trade4, trade5):
+    """Returns an instance of PortfolioAnalysis with Start and End Date 
+    params"""
+    params = {'start': '02012022', 'end': '02282022'}
+    return PortfolioAnalysis(new_user, **params)

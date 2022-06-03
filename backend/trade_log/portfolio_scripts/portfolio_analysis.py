@@ -5,7 +5,7 @@ from trade_log.models import Trade
 from datetime import datetime, timedelta
 
 class PortfolioAnalysis:
-    def __init__(self, owner, params):
+    def __init__(self, owner, **params):
         self.owner = owner
         self.params = params
         self.filters = self.init_filter()
@@ -116,8 +116,8 @@ class PortfolioAnalysis:
         return portfolio_filter.filter_trades()
 
     def find_all_stocks(self, trades):
-        """Returns list of stock names in given trades"""
-        # stocks = trades.values_list('stock', flat=True).distinct()
+        """Takes in queryset of trade. Returns list of stock names in given 
+        trades"""
         stocks = trades.values_list('stock', flat=True).distinct()
         return set(stocks)
 
