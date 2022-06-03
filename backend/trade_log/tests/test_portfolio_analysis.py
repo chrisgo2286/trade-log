@@ -1,3 +1,4 @@
+from xml.dom.expatbuilder import FILTER_SKIP
 import pytest
 from datetime import datetime, date
 from trade_log.tests.fixtures import (params, portfolio, trade1, trade2, 
@@ -13,6 +14,10 @@ OWNER = 'tester'
 STOCK_LIST = ['VCN.TO', 'XUS.TO']
 DATE_LIST = [START_DATE, date(2022, 2, 6), date(2022, 2, 11), 
     date(2022, 2, 16), date(2022, 2, 21), date(2022, 2, 26), END_DATE]
+FILTERS = {'end': date(2022, 3, 31)}
+TRADE1 = 'VCN.TO @ 43.00 on 2022-02-01'
+TRADE2 = 'VCN.TO @ 44.00 on 2022-02-15'
+TRADE3 = 'XUS.TO @ 70.50 on 2022-02-15'
 
 def test_find_interval(portfolio):
     """Tests that func return correct interval"""
@@ -31,7 +36,10 @@ def test_find_all_stocks(portfolio):
 
 def test_filter_trades(params):
     """Tests that func returns correct trades filtered by params"""
-    pass
+    trades = params.filter_trades(params.filters)
+    assert trades[0].__str__() == TRADE1
+    assert trades[1].__str__() == TRADE2
+    assert trades[2].__str__() == TRADE3
 
 def test_find_end_date_with_params(params):
     """Tests that func returns correct start date obj"""
@@ -47,7 +55,9 @@ def test_find_start_date(params):
 
 def test_build_new_filter(params):
     """Tests that func correctly revises filters attribute"""
-    pass
+    new_filter = params.build_new_filter(FILTERS)
+    assert new_filter.get('start') == START_DATE
+    assert new_filter.get('end') == FILTERS.get('end')
 
 def test_init_filter_no_params(portfolio):
     """Tests that func creates correct filters"""
