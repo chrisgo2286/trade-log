@@ -27,6 +27,10 @@ AVERAGE_PRICE = 43.83
 LOSS = -4.0
 LOSS_PER_SHARE = -.13
 MARKET_VALUE = 1311
+ROI = -6.62
+PORTFOLIO_ACB = 2402.5
+PORTFOLIO_VALUE = 2341.50
+PORTFOLIO_RETURN = -61.00
 
 def test_find_interval(portfolio):
     """Tests that func return correct interval"""
@@ -93,3 +97,17 @@ def test_compile_stock_data(portfolio):
             assert round(stock.get('pl'),2) == LOSS
             assert round(stock.get('pl_per_share'),2) == LOSS_PER_SHARE
             assert round(stock.get('value'),1) == MARKET_VALUE
+
+def test_calc_roi(portfolio):
+    """Tests that roi is calculated correctly"""
+    assert round(portfolio.data.get('roi'), 2) == ROI
+
+def test_compile_overview_data(portfolio):
+    """Tests that func sets correct portfolio ACB, Value and Return"""
+    assert portfolio.data.get('acb') == PORTFOLIO_ACB
+    assert round(portfolio.data.get('value'),2) == PORTFOLIO_VALUE
+    assert round(portfolio.data.get('return'),2) == PORTFOLIO_RETURN
+
+def test_compile_values_data(portfolio):
+    """Test that func populates data attr with correct date/value dict pairs"""
+    pass

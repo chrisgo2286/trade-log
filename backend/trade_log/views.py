@@ -25,7 +25,7 @@ def portfolio_view(request):
     # market_data = MarketData()
     # market_data.pull()
 
-    portfolio = PortfolioAnalysis(request.user, request.query_params)
+    portfolio = PortfolioAnalysis(request.user, **request.query_params)
     data = portfolio.data
 
     return Response(data)
