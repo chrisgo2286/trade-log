@@ -19,6 +19,15 @@ TRADE1 = 'VCN.TO @ 43.00 on 2022-02-01'
 TRADE2 = 'VCN.TO @ 44.00 on 2022-02-15'
 TRADE3 = 'XUS.TO @ 70.50 on 2022-02-15'
 
+STOCK = 'VCN.TO'
+PRICE = 43.7
+SHARES = 30
+ACB = 1315.0
+AVERAGE_PRICE = 43.83
+LOSS = -4.0
+LOSS_PER_SHARE = -.13
+MARKET_VALUE = 1311
+
 def test_find_interval(portfolio):
     """Tests that func return correct interval"""
     assert portfolio.find_interval(START_DATE, END_DATE) == INTERVAL
@@ -70,3 +79,17 @@ def test_init_filter_with_params(params):
     assert params.filters.get('owner').username == OWNER
     assert params.filters.get('end') == END_DATE
     assert params.filters.get('start') == START_DATE
+
+def test_compile_stock_data(portfolio):
+    """Tests that stock data is entered correctly"""
+    stocks = portfolio.data.get('stocks')
+    for stock in stocks:
+        if stock.get('stock') == STOCK:
+            print(stock)
+            assert round(stock.get('market'), 1) == PRICE
+            assert stock.get('shares') == SHARES
+            assert stock.get('acb') == ACB
+            assert round(stock.get('average'),2) == AVERAGE_PRICE
+            assert round(stock.get('pl'),2) == LOSS
+            assert round(stock.get('pl_per_share'),2) == LOSS_PER_SHARE
+            assert round(stock.get('value'),1) == MARKET_VALUE

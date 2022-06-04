@@ -68,7 +68,7 @@ class PortfolioAnalysis:
                 value = analysis.compile_value_only()
                 self.data['values'][ndx]['value'] += value
 
-    # Helper Functions
+    # Helper Methods
     def init_filter(self):
         """
         Parses through string parameters and converts to correct type

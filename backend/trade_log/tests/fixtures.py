@@ -102,7 +102,7 @@ def analysis(trade1, trade2, trade3):
 
 #test_portfolio_analysis.py
 @pytest.fixture
-def portfolio(new_user, trade1, trade2, trade3, trade4, trade5):
+def portfolio(new_user, trade1, trade2, trade3, trade5):
     """Returns an instance of PortfolioAnalysis with no params"""
     return PortfolioAnalysis(new_user)
 
