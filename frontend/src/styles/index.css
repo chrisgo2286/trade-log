@@ -1,0 +1,23 @@
+:root {
+  --siteFontColor: rgba(48, 42, 42, 0.65);
+  --siteBorderColor: rgba(211, 211, 211, .75);
+  --navBarBG: rgba(211, 211, 211, .5);  
+  --navBarLinkHover: slategrey;
+  --tradeListHeaderColor: lightgrey;
+  --hoverColor: rgba(211, 231, 240, 0.5);
+  --modalHeaderColor: var(--hoverColor);
+  --errorColor: rgba(255, 0, 0, .25);
+  --filterHeaderColor: rgba(187, 218, 195, 0.5);
+  --buyColor: var(--hoverColor);
+  --sellColor: rgba(137, 204, 131, 0.3);
+  --valueColor: rgba(51, 65, 50, 0.60);
+  --valueProfitColor: rgba(137, 204, 131, 0.85);
+  --valueLossColor: rgba(255, 0, 0, .55)
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial;
+  font-size: 14px;
+  color: var(--siteFontColor);
+}

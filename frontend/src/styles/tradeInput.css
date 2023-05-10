@@ -1,0 +1,19 @@
+.trade-input {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+  }
+
+  .trade-input label {
+    text-align: right;
+    margin: 5px 0px;
+    margin-right: 20%;
+  }
+
+  .trade-input input {
+    padding-left: 10px;
+    width: 80%;
+    height: 20px;
+    margin: 5px 0px;
+    border: 1px solid var(--siteBorderColor);
+    border-radius: 10px;
+  }

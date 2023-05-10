@@ -1,0 +1,50 @@
+.ledger {
+  margin: 50px auto;
+  max-width: 1000px;
+}
+
+.ledger-btns {
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+}
+/* TRADELIST */
+  
+.trade-list {
+  display: flex;
+  flex-direction: column;
+}
+  
+.trade,
+.header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 10px 0px 5px 25px;
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+  cursor: pointer;
+}
+  
+.header {
+  height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+  background-color: var(--tradeListHeaderColor);
+}
+
+.material-icons {
+  vertical-align: middle;
+}
+
+.trade-hover {
+  opacity: .75;
+}
+
+.buy {
+  background-color: var(--buyColor);
+}
+
+.sell {
+  background-color: var(--sellColor);
+}

@@ -1,0 +1,111 @@
+.portfolio {
+  margin: 50px auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-areas:
+    'btns btns btns' 
+    'chart1 overview chart2'
+    'data data chart3';
+  grid-template-rows: 50px 400px 400px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ledger-btns {
+  grid-area: btns;
+}
+
+#chart1 {
+  grid-area: chart1;
+}
+
+#chart2 {
+  grid-area: chart2;
+}
+
+#chart3 {
+  grid-area: chart3;
+}
+
+#overview {
+  grid-area: overview;
+}
+
+.stock-summary {
+  grid-area: data;
+  height: 92%;
+}
+
+.chart {
+}
+
+.chart-body, .overview {
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+  height: 92%;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-stat {
+  height: 100%;
+  width: 100%;
+  border: 1px solid var(--siteBorderColor)
+}
+
+.overview-category {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.overview-value {
+  color: var(--valueColor);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.profit {
+  color: var(--valueProfitColor);
+}
+
+.loss {
+  color: var(--valueLossColor);
+}
+
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.stock-summary-headers, .summary-item {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 10px 0px 5px 25px;
+  border: 1px solid var(--siteBorderColor);
+  border-radius: 10px;
+}
+
+.stock-summary-headers {
+  font-weight: bold;
+  background-color: var(--modalHeaderColor);
+}
+
+.stock-summary-header, .summary-items div {
+  text-align: left;
+}
+
+.chart-header {
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  border-bottom: 1px solid var(--siteBorderColor);
+  background-color: var(--modalHeaderColor);
+  border-radius: 10px;
+}

@@ -1,0 +1,29 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10vh;
+  background: var(--navBarBG);
+}
+  
+nav a {
+  margin: 0px 20px;
+  text-decoration: none;
+}
+  
+nav a:hover {
+  color: var(--navBarLinkHover);
+}
+
+.user-links span {
+  margin: 0px 20px;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+.logout a:hover {
+  color: var(--navBarLinkHover);  
+}
