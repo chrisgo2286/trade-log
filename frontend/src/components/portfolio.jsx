@@ -13,6 +13,7 @@ export default function Portfolio() {
   const fetchData = async () => {
     const result = await axios.get('/api/portfolio/',); //ADD PARAMS HERE
     setData(result.data);
+    console.log(result.data)
   }
 
   useEffect(() => {
