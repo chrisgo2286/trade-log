@@ -1,5 +1,11 @@
 import yfinance as yf
 
+"""
+- Compile list of user stocks
+- Pull market data
+- Send back to frontend
+
+"""
 class MarketData:
 
     STOCKS = {
